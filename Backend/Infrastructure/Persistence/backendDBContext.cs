@@ -13,19 +13,14 @@ namespace Infrastructure.Persistence
     {
         public BackendDBContext(DbContextOptions<BackendDBContext> options) : base(options) { }
 
+        //Entities' DbSets
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-
-        //DBSets de los AggregateRoots
-        public DbSet<Empleado> Empleados { get; set; } // ya estan
-        public DbSet<Empresa> Empresa { get; set; } // ya esta (No necesita)
-        public DbSet<EncabezadoFactura> EncabezadoFacturas { get; set; } // ya esta 
-        public DbSet<Propiedad> Propiedades { get; set; } // ya esta
-        public DbSet<Reserva> Reservas { get; set; } // ya esta
-        public DbSet<Vehiculo> Vehiculos { get; set; } // ya esta
-
-        //DBSets de las Entities
+        public DbSet<Empleado> Empleados { get; set; } 
+        public DbSet<Empresa> Empresa { get; set; }  
+        public DbSet<Propiedad> Propiedades { get; set; }  
+        public DbSet<Vehiculo> Vehiculos { get; set; } 
         public DbSet<AreaTrabajo> AreasTrabajo { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
         public DbSet<DatosPago> DatosPagos { get; set; }
@@ -38,22 +33,26 @@ namespace Infrastructure.Persistence
         public DbSet<Modelo> Modelos { get; set; }
         public DbSet<Pais> Paises { get; set; }
         public DbSet<PuestoTrabajo> PuestosTrabajo { get; set; }
-        public DbSet<ReseñaPropiedad> ReseñasPropiedad { get; set; }
-        public DbSet<ReseñaVehiculo> ReseñasVehiculo { get; set; }
-        public DbSet<ReservaVehiculo> ReservasVehiculo { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
         public DbSet<Telefono> Telefonos { get; set; }
         public DbSet<TipoVehiculo> TiposVehiculo { get; set; }
         public DbSet<Valoracion> Valoraciones { get; set; }
 
+        //Aggregates' DbSets
+        public DbSet<EncabezadoFactura> EncabezadoFacturas { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<ReseñaVehiculo> ReseñasVehiculo { get; set; }
+        public DbSet<ReservaVehiculo> ReservasVehiculo { get; set; }
+        public DbSet<ReseñaPropiedad> ReseñasPropiedad { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Queremos que el DNI sea la Primary Key de la tabla Persona 
+            // DNI will be the Primary Key of the Persona table 
             modelBuilder.Entity<Persona>().HasKey(p => p.DNI);
 
-            //Construir para la tabla Usuarios
+            //Usuarios' Foreign keys
             modelBuilder.Entity<Usuario>()
                 .HasOne(u => u.Persona)
                 .WithMany()
@@ -66,7 +65,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(u => u.RolId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key para Empleado
+            //Empleados' Foreign keys
             modelBuilder.Entity<Empleado>()
                 .HasOne(e => e.Persona)
                 .WithMany()
@@ -91,13 +90,12 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(e => e.DireccionId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save a decimal field in the Empleado table
             modelBuilder.Entity<Empleado>()
                 .Property(e => e.Salario)
                 .HasColumnType("decimal(18,2)");
 
-            //Empresa no tiene Foreign Key
-
-            //Foreign Key EncabezadoFactura
+            //EncabezadoFactura's Foreign keys
             modelBuilder.Entity<EncabezadoFactura>()
                 .HasOne(ef => ef.Usuario)
                 .WithMany()
@@ -122,7 +120,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(ef => ef.IdSucursal)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign key Propiedad
+            //Propiedad's Foreign keys
             modelBuilder.Entity<Propiedad>()
                 .HasOne(pr => pr.Direccion)
                 .WithMany()
@@ -141,6 +139,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(pr => pr.IdEstadoReserva)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save decimal fields in the Propiedad table
             modelBuilder.Entity<Propiedad>()
                 .Property(e => e.MediaValoracion)
                 .HasColumnType("decimal(18,2)");
@@ -149,7 +148,7 @@ namespace Infrastructure.Persistence
                 .Property(e => e.PrecioPorNoche)
                 .HasColumnType("decimal(18,2)");
 
-            //Foreign Key Reserva
+            //Propiedad's Foreign keys
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Propiedad)
                 .WithMany()
@@ -168,6 +167,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(r => r.IdEmpleadoLogistica)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save decimal fields in the Reserva table
             modelBuilder.Entity<Reserva>()
                 .Property(e => e.Adelanto)
                 .HasColumnType("decimal(18,2)");
@@ -180,7 +180,7 @@ namespace Infrastructure.Persistence
                 .Property(e => e.PrecioEstadia)
                 .HasColumnType("decimal(18,2)");
 
-            //Foreign Key de Vehiculos
+            //vehiculo's Foreign keys
             modelBuilder.Entity<Vehiculo>()
                 .HasOne(v => v.Modelo)
                 .WithMany()
@@ -205,19 +205,19 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(v => v.IdEstadoReserva)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save a decimal field in the Reserva table
             modelBuilder.Entity<Vehiculo>()
                 .Property(e => e.PrecioDia)
                 .HasColumnType("decimal(18,2)");
 
-            //Foreign Keys de las Entities
-            //Foreign key de Ciudad
+            //Ciudad's Foreign keys
             modelBuilder.Entity<Ciudad>()
                 .HasOne(c => c.Departamento)
                 .WithMany()
                 .HasForeignKey(c => c.DepartamentoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de DatosPago
+            //DatosPago's Foreign keys
             modelBuilder.Entity<DatosPago>()
                 .HasOne(dp => dp.Reserva)
                 .WithMany()
@@ -230,20 +230,21 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(dp => dp.IdMetodoPago)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de Departamentos
+            //Departamentos' Foreign keys
             modelBuilder.Entity<Departamento>()
                 .HasOne(d => d.Pais)
                 .WithMany()
                 .HasForeignKey(d => d.IdPais)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de DetalleFactura
+            //DetalleFactura's Foreign keys
             modelBuilder.Entity<DetalleFactura>()
                 .HasOne(df => df.EncabezadoFactura)
                 .WithMany()
                 .HasForeignKey(df => df.IdEncabezadoFactura)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save decimal fields in the Reserva table
             modelBuilder.Entity<DetalleFactura>()
                 .Property(e => e.Subtotal)
                 .HasColumnType("decimal(18,2)");
@@ -252,28 +253,28 @@ namespace Infrastructure.Persistence
                 .Property(e => e.Total)
                 .HasColumnType("decimal(18,2)");
 
-            //Foreign Key de Direccion
+            //Direccion's Foreign keys
             modelBuilder.Entity<Direccion>()
                 .HasOne(drc => drc.Ciudad)
                 .WithMany()
                 .HasForeignKey(drc => drc.IdCiudad)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de Modelo
+            //Modelo's Foreign keys
             modelBuilder.Entity<Modelo>()
                 .HasOne(m => m.Marca)
                 .WithMany()
                 .HasForeignKey(m => m.IdMarca)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de PuestoTrabajo
+            //PuestoTrabajo's Foreign keys
             modelBuilder.Entity<PuestoTrabajo>()
                 .HasOne(pt => pt.Area)
                 .WithMany()
                 .HasForeignKey(pt => pt.IdArea)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de ReseñaPropiedad
+            //ReseñaPropiedad's Foreign keys
             modelBuilder.Entity<ReseñaPropiedad>()
                 .HasOne(rp => rp.UsuarioHuesped)
                 .WithMany()
@@ -292,7 +293,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(rp => rp.IdValoracion)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de ReseñaVehiculo
+            //ReseñaVehiculo's Foreign keys
             modelBuilder.Entity<ReseñaVehiculo>()
                 .HasOne(rv => rv.UsuarioHuesped)
                 .WithMany()
@@ -311,7 +312,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(rv => rv.IdValoracion)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de ReservaVehiculo
+            //ReservaVehiculo's Foreign keys
             modelBuilder.Entity<ReservaVehiculo>()
                 .HasOne(rvv => rvv.Vehiculo)
                 .WithMany()
@@ -324,6 +325,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(rvv => rvv.IdReserva)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //save decimal fields in the Reserva table
             modelBuilder.Entity<ReservaVehiculo>()
                 .Property(e => e.ImpuestoVehiculo)
                 .HasColumnType("decimal(18,2)");
@@ -332,7 +334,7 @@ namespace Infrastructure.Persistence
                 .Property(e => e.PrecioVehiculo)
                 .HasColumnType("decimal(18,2)");
 
-            //Foreign Key de Sucursal
+            //Sucursal's Foreign keys
             modelBuilder.Entity<Sucursal>()
                 .HasOne(s => s.Direccion)
                 .WithMany()
@@ -345,7 +347,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(s => s.IdEmpresa)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Foreign Key de Telefono
+            //Telefono's Foreign keys
             modelBuilder.Entity<Telefono>()
                 .HasOne(t => t.Persona)
                 .WithMany()
