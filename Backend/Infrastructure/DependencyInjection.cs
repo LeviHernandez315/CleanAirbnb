@@ -1,6 +1,9 @@
 ﻿//using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
 //using Application.Services.Entidades;
 //using Infrastructure.Repositorio.Entidades;
+using Application.Interfaces;
+using Application.Services;
+using Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 namespace Infrastructure
 {
@@ -11,8 +14,13 @@ namespace Infrastructure
         {
 
             //los services.AddScoped de AreaTrabajo
-           // services.AddScoped<IAreaTrabajoRepository, AreaTrabajoRepository>();
+            // services.AddScoped<IAreaTrabajoRepository, AreaTrabajoRepository>();
             //services.AddScoped<IAreaTrabajoService, AreaTrabajoService>();
+
+            services.AddScoped<IRolRepository, RolRepository>();
+            services.AddScoped<IRolService, RolService>();
+
+
 
             //Aquí agregar las otras entidades y agregados
 
