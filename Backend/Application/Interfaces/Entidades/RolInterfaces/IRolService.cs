@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.DTOs.Rol;
+using Application.DTOs.Entidades.Rol;
+using Application.DTOs.Entidades.RolDTOs;
 
-
-namespace Application.Interfaces
+namespace Application.Interfaces.Entidades.RolInterfaces
 {
     public interface IRolService
     {

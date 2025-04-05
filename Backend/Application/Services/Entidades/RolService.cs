@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.DTOs.Rol;
-using Application.Interfaces;
-
 using Domain.Entities;
+using Application.Interfaces.Entidades.RolInterfaces;
+using Application.DTOs.Entidades.RolDTOs;
+using Application.DTOs.Entidades.Rol;
 
-namespace Application.Services
+namespace Application.Services.Entidades
 {
     public class RolService : IRolService
     {

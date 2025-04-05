@@ -1,9 +1,8 @@
 ﻿//using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
 //using Application.Services.Entidades;
 //using Infrastructure.Repositorio.Entidades;
-using Application.Interfaces;
-
-using Application.Services;
+using Application.Interfaces.Entidades.RolInterfaces;
+using Application.Services.Entidades;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Entidades;
 using Microsoft.Extensions.DependencyInjection;

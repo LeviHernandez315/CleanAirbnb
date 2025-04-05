@@ -1,6 +1,6 @@
 ﻿
-using Application.DTOs.Rol;
-using Application.Interfaces;
+using Application.DTOs.Entidades.Rol;
+using Application.Interfaces.Entidades.Rol;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
