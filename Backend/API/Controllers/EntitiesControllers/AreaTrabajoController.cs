@@ -1,4 +1,7 @@
 ﻿
+
+using Application.DTOs.Entidades.AreaTrabajoDTOs;
+using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

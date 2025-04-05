@@ -1,9 +1,10 @@
 ﻿
-using Application.DTOs.Entidades.Rol;
-using Application.Interfaces.Entidades.Rol;
+using Application.DTOs.Entidades.RolDTOs;
+using Application.Interfaces.Entidades.RolInterfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
-namespace API.Controllers
+namespace API.Controllers.EntitiesControllers
 {
 
     [ApiController]
