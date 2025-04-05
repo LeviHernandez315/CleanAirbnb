@@ -3,7 +3,8 @@ using Domain.AggregateRoots;
 using Domain.Common;
 
 namespace Domain.Entities
-    public class Vehiculo:AggregateRoot
+{ 
+    public class Vehiculo:Entity
     {
         public int IdModelo { get; set; }
 
