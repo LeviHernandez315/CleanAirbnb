@@ -1,0 +1,56 @@
+
+
+.contenedor-principal{
+
+    padding: 1rem;
+    width: 90%;
+    background-color: white;
+    margin: 1rem;
+    border-radius: 5px;
+
+}
+
+
+.contenedor-tarjetas{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+.contenedor-formulario{
+
+    margin-top: 2rem;
+}
+
+.form-group{
+
+
+    margin-top: 1rem;
+
+}
+
+.form-label{
+
+    font-style: normal;
+    font-weight:600;
+    font-size: 17px;
+    line-height: 23px;
+    color: black;
+
+}
+
+.contenedor-fecha{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 15px;
+
+
+}
+
+.btn btn-primary{
+
+    margin-left: 5rem !important;
+}
+
