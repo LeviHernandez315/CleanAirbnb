@@ -8,7 +8,7 @@ using Domain.Common;
 using Domain.Entities;
 
 
-namespace Dominio.AggregateRoots
+namespace Domain.AggregateRoots
 {
     public class EncabezadoFactura: AggregateRoot
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Common;
-using Dominio.AggregateRoots;
+using Domain.AggregateRoots;
 
 
 namespace Domain.Entities
