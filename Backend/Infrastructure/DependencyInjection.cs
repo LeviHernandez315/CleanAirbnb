@@ -1,6 +1,6 @@
-﻿using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
-using Application.Services.Entidades;
-using Infrastructure.Repositorio.Entidades;
+﻿//using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
+//using Application.Services.Entidades;
+//using Infrastructure.Repositorio.Entidades;
 using Microsoft.Extensions.DependencyInjection;
 namespace Infrastructure
 {
