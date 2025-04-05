@@ -7,7 +7,7 @@ using Domain.AggregateRoots;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Persistence
+namespace Infrastructure.Persistence
 {
      public class BackendDBContext : DbContext
     {
