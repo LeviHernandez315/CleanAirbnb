@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Entidades.CiudadInterfaces;
-using Dominio.Entities;
-using Infraestructure.Persistence;
+using Domain.Entities;
+using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Entidades
