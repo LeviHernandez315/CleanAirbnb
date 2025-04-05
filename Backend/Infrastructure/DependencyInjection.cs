@@ -1,41 +1,45 @@
-﻿//using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
-//using Application.Services.Entidades;
-//using Infrastructure.Repositorio.Entidades;
-using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
+﻿using Application.Interfaces.Entidades.AreaTrabajoInterfaces;
+using Application.Services.Entidades;
+using Infrastructure.Repositories.Entidades;
+using Application.Services.AggregateRoots;
+using Infrastructure.Repositories.AggregateRoots;
+
+
 using Application.Interfaces.Entidades.CiudadInterfaces;
-//using Application.Interfaces.Entidades.DatosPagosInterfaces;
+using Application.Interfaces.Entidades.DatosPagoInterfaces;
 using Application.Interfaces.Entidades.DepartamentoInterfaces;
-//using Application.Interfaces.Entidades.DetalleFacturasInterfaces;
+using Application.Interfaces.Entidades.DetalleFacturaInterfaces;
 using Application.Interfaces.Entidades.DireccionInterfaces;
-/*using Application.Interfaces.Entidades.EmpleadosInterfaces;
+using Application.Interfaces.Entidades.EmpleadoInterfaces;
 using Application.Interfaces.Entidades.EmpresaInterfaces;
-using Application.Interfaces.Entidades.EncabezadoFacturasInterfaces;
-using Application.Interfaces.Entidades.EstadosReservaInterfaces;
-using Application.Interfaces.Entidades.MarcasInterfaces;
-using Application.Interfaces.Entidades.MetodosPagoInterfaces;
-using Application.Interfaces.Entidades.ModelosInterfaces; */
+using Application.Interfaces.AggregateRoots.EncabezadoFacturaInterfaces;
+using Application.Interfaces.Entidades.EstadoReservaInterfaces;
+
 using Application.Interfaces.Entidades.PaisInterfaces;
 using Application.Interfaces.Entidades.PersonaInterfaces;
-//using Application.Interfaces.Entidades.PropiedadesInterfaces;
+using Application.Interfaces.Entidades.PropiedadInterfaces;
 using Application.Interfaces.Entidades.PuestoTrabajoInterfaces;
-/*using Application.Interfaces.Entidades.ReseñasPropiedadInterfaces;
-using Application.Interfaces.Entidades.ReseñasVehiculoInterfaces;
-using Application.Interfaces.Entidades.ReservasInterfaces;
-using Application.Interfaces.Entidades.ReservasVehiculoInterfaces; */
+using Application.Interfaces.AggregateRoots.ReseñaPropiedadInterfaces;
+using Application.Interfaces.AggregateRoots.ReseñaVehiculoInterfaces;
+using Application.Interfaces.AggregateRoots.ReservaInterfaces;
+using Application.Interfaces.AggregateRoots.ReservaVehiculoInterfaces; 
 using Application.Interfaces.Entidades.RolInterfaces;
-/*using Application.Interfaces.Entidades.SucursalesInterfaces;
-using Application.Interfaces.Entidades.TelefonosInterfaces;
-using Application.Interfaces.Entidades.TiposVehiculoInterfaces;
-using Application.Interfaces.Entidades.UsuariosInterfaces;
-using Application.Interfaces.Entidades.ValoracionesInterfaces;
-using Application.Interfaces.Entidades.VehiculoInterfaces; */
+using Application.Interfaces.Entidades.SucursalInterfaces;
+/*
+using Application.Interfaces.Entidades.TelefonoInterfaces;
+using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
+using Application.Interfaces.Entidades.MarcaInterfaces;
+using Application.Interfaces.Entidades.MetodoPagoInterfaces;
+using Application.Interfaces.Entidades.ValoracionInterfaces;
+using Application.Interfaces.Entidades.ModeloInterfaces; */
+using Application.Interfaces.Entidades.UsuarioInterfaces;
+
+using Application.Interfaces.Entidades.VehiculoInterfaces; 
 // Repositories
 
 
-using Application.Interfaces.Entidades.RolInterfaces;
-using Application.Services.Entidades;
 using Infrastructure.Repositories;
-using Infrastructure.Repositories.Entidades;
+
 using Microsoft.Extensions.DependencyInjection;
 namespace Infrastructure
 {
@@ -72,77 +76,78 @@ namespace Infrastructure
 
             services.AddScoped<IPuestoTrabajoRepository, PuestoTrabajoRepository>();
             services.AddScoped<IPuestoTrabajoService, PuestoTrabajoService>();
-/*
-            services.AddScoped<IDatosPagosRepository, DatosPagosRepository>();
-            services.AddScoped<IDatosPagosService, DatosPagosService>();
+
+            services.AddScoped<IDatosPagoRepository, DatosPagoRepository>();
+            services.AddScoped<IDatosPagoService, DatosPagoService>();
 
            
 
-            services.AddScoped<IDetalleFacturasRepository, DetalleFacturasRepository>();
-            services.AddScoped<IDetalleFacturasService, DetalleFacturasService>();
+            services.AddScoped<IDetalleFacturaRepository, DetalleFacturaRepository>();
+            services.AddScoped<IDetalleFacturaService, DetalleFacturaService>();
 
           
 
-            services.AddScoped<IEmpleadosRepository, EmpleadosRepository>();
-            services.AddScoped<IEmpleadosService, EmpleadosService>();
+            services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
+            services.AddScoped<IEmpleadoService, EmpleadoService>();
 
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<IEmpresaService, EmpresaService>();
 
-            services.AddScoped<IEncabezadoFacturasRepository, EncabezadoFacturasRepository>();
-            services.AddScoped<IEncabezadoFacturasService, EncabezadoFacturasService>();
+            services.AddScoped<IEncabezadoFacturaRepository, EncabezadoFacturaRepository>();
+            services.AddScoped<IEncabezadoFacturaService, EncabezadoFacturaService>();
 
-            services.AddScoped<IEstadosReservaRepository, EstadosReservaRepository>();
-            services.AddScoped<IEstadosReservaService, EstadosReservaService>();
+            services.AddScoped<IEstadoReservaRepository, EstadoReservaRepository>();
+            services.AddScoped<IEstadoReservaService, EstadoReservaService>();
+             /*
+            services.AddScoped<IMarcaRepository, MarcaRepository>();
+            services.AddScoped<IMarcaService, MarcaService>();
 
-            services.AddScoped<IMarcasRepository, MarcasRepository>();
-            services.AddScoped<IMarcasService, MarcasService>();
+            services.AddScoped<IMetodoPagoRepository, MetodPagoRepository>();
+            services.AddScoped<IMetodoPagoService, MetodosPagoService>();
 
-            services.AddScoped<IMetodosPagoRepository, MetodosPagoRepository>();
-            services.AddScoped<IMetodosPagoService, MetodosPagoService>();
-
-            services.AddScoped<IModelosRepository, ModelosRepository>();
-            services.AddScoped<IModelosService, ModelosService>();
+            services.AddScoped<IModeloRepository, ModeloRepository>();
+            services.AddScoped<IModeloService, ModeloService>();
+             */
 
 
-
-            services.AddScoped<IPropiedadesRepository, PropiedadesRepository>();
-            services.AddScoped<IPropiedadesService, PropiedadesService>();
+            services.AddScoped<IPropiedadRepository, PropiedadRepository>();
+            services.AddScoped<IPropiedadService, PropiedadService>();
 
          
 
-            services.AddScoped<IReseñasPropiedadRepository, ReseñasPropiedadRepository>();
-            services.AddScoped<IReseñasPropiedadService, ReseñasPropiedadService>();
+            services.AddScoped<IReseñaPropiedadRepository, ReseñaPropiedadRepository>();
+            services.AddScoped<IReseñaPropiedadService, ReseñaPropiedadService>();
 
-            services.AddScoped<IReseñasVehiculoRepository, ReseñasVehiculoRepository>();
-            services.AddScoped<IReseñasVehiculoService, ReseñasVehiculoService>();
+            services.AddScoped<IReseñaVehiculoRepository, ReseñaVehiculoRepository>();
+            services.AddScoped<IReseñaVehiculoService, ReseñaVehiculoService>();
 
-            services.AddScoped<IReservasRepository, ReservasRepository>();
-            services.AddScoped<IReservasService, ReservasService>();
+            services.AddScoped<IReservaRepository, ReservaRepository>();
+            services.AddScoped<IReservaService, ReservaService>();
 
-            services.AddScoped<IReservasVehiculoRepository, ReservasVehiculoRepository>();
-            services.AddScoped<IReservasVehiculoService, ReservasVehiculoService>();
+            services.AddScoped<IReservaVehiculoRepository, ReservaVehiculoRepository>();
+            services.AddScoped<IReservaVehiculoService, ReservaVehiculoService>();
 
 
-            services.AddScoped<ISucursalesRepository, SucursalesRepository>();
-            services.AddScoped<ISucursalesService, SucursalesService>();
+            services.AddScoped<ISucursalRepository, SucursalRepository>();
+            services.AddScoped<ISucursalService, SucursalService>();
+/*
+            services.AddScoped<ITelefonoRepository, TelefonoRepository>();
+            services.AddScoped<ITelefonoService, TelefonoService>();
 
-            services.AddScoped<ITelefonosRepository, TelefonosRepository>();
-            services.AddScoped<ITelefonosService, TelefonosService>();
+            services.AddScoped<ITipoVehiculoRepository, TipoVehiculoRepository>();
+            services.AddScoped<ITipoVehiculoService, TipoVehiculoService>();
+            services.AddScoped<IValoracionRepository, ValoracionRepository>();
+            services.AddScoped<IValoracionService, ValoracionService>();
+ */
 
-            services.AddScoped<ITiposVehiculoRepository, TiposVehiculoRepository>();
-            services.AddScoped<ITiposVehiculoService, TiposVehiculoService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
-            services.AddScoped<IUsuariosRepository, UsuariosRepository>();
-            services.AddScoped<IUsuariosService, UsuariosService>();
-
-            services.AddScoped<IValoracionesRepository, ValoracionesRepository>();
-            services.AddScoped<IValoracionesService, ValoracionesService>();
-
+          
 
             services.AddScoped<IVehiculoRepository, VehiculoRepository>();
             services.AddScoped<IVehiculoService, VehiculoService>(); 
-*/
+
 
 
 
