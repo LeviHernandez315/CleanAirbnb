@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.Rol;
 
+
 namespace Application.Interfaces
 {
     public interface IRolService
