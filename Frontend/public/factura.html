@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="assets/css/factura.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar bg-body-tertiary" style=" background-color:rgb(220, 230, 242) !important;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="assets/img/Captura1.PNG" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+            Airbnb Rentals S.A
+          </a>
+        </div>
+      </nav>
+    <nav id="Contenidos">
+        <div class="card" style="width: 18rem;" id="Factura" class="Factura">
+            <img src="assets/img/Captura2.PNG" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Trap H</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Auto:no </li>
+              <li class="list-group-item">Comida : no</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <div class="card-body">
+              <a >Total:</a>
+              <a >22222</a>
+            </div>
+          </div>
+
+        <div  class="Factura" id="Factura2" >
+        <h1>Factura de Alquiler</h1>
+        <div class="header" >
+            <div class="header-item">
+                <span>Número de factura:</span>
+                <span>0001</span>
+            </div>
+            <div class="header-item">
+                <span>Fecha de emisión:</span>
+                <span>2023-08-01</span>
+            </div>
+        </div>
+        <div>rtn</div>
+        <div>cai</div>
+        <div>Fecha Limite</div>
+        <div class="emisor">
+            <div class="emisor-info">
+                <span>Nombre del emisor:</span>
+                <span>Airbnb Rentals S.A.</span>
+            </div>
+            <div class="emisor-info">
+                <span>Dirección del emisor:</span>
+                <span>Dirección del Emisor, Ciudad, Honduras</span>
+            </div>
+            <div class="emisor-info">
+                <span>Número de registro de contribuyente del emisor:</span>
+                <span>0801-1234-56789</span>
+            </div>
+        </div>
+        <div id="receptor" class="receptor">
+            <div class="receptor-info">
+                <span>Nombre del receptor:</span>
+                <span>Cliente Rentador S.A.</span>
+            </div>
+            <div class="receptor-info">
+                <span>Dirección del receptor:</span>
+                <span>Dirección del Receptor, Ciudad, Honduras</span>
+            </div>
+            <div class="receptor-info">
+                <span>Número de registro de contribuyente del receptor:</span>
+                <span>0801-9876-54321</span>
+            </div>
+        </div>
+        <div class="servicios">
+            <h2>Servicios Alquilados</h2>
+            <table class="items">
+                <tr>
+                    <th>Descripción</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Costo</th>
+                </tr>
+                <tr>
+                    <td>Alojamiento en Airbnb (5 noches)</td>
+                    <td>2023-08-10</td>
+                    <td>2023-08-15</td>
+                    <td>L. 1,500.00</td>
+                </tr>
+                <tr>
+                    <td>Alquiler de carro</td>
+                    <td>2023-08-10</td>
+                    <td>2023-08-15</td>
+                    <td>L. 800.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="subtotal">
+            <span>Subtotal:</span>
+            <span  id="FsubtotalPago">L. 2,300.00</span>
+        </div>
+        <div class="impuesto">
+            <span>Impuesto (ISV):</span>
+            <span id="FimpPago" >L. 345.00</span>
+        </div>
+        <div class="total">
+            <span>Total a pagar:</span>
+            <span id="FtotalPago">L. 2,645.00</span>
+        </div>
+    </div>
+    </nav>
+    <script src="/src/public/assets/js/facturaController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

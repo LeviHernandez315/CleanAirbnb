@@ -1,0 +1,78 @@
+/*--------------- Estilos del cuerpo de la pagina ---------------------*/
+body{
+    background-color: #dce6f2;
+    /* border: solid 1em red; */
+    margin:0;
+}
+/* -------------------Final del Estilo --------------------------------*/
+
+/* --------------------Estilos del navbar ------------------------------*/
+#nav{
+    background-color: #5391e8;
+    /* background-color: #DCE6F2 !important; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 300px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    /* border: solid 1px; */
+}
+
+#direccion{ /*Este esl el primer div del navbar*/
+    color:black;
+    text-decoration: none;
+}
+
+nav img{
+    width: 30px;
+    height: 24px;
+} /*Finaliza el estilo del primer div del navbar*/
+
+.input-group{ /* El div del Buscador*/
+    margin: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#search{
+    padding-left: 27px;
+    background-color: #c6d8ed;
+    border: solid 1px;
+    border-radius: 7px;
+}
+
+.icon{
+    position: absolute;
+    left: 10px;
+} /* Fin*/
+
+#usuario{ /*-El div del usuario*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 200px; */
+} /* Fin*/
+
+
+/*------------------------- Estilos del main ------------------------ */
+
+main{
+    padding-top: 90px;
+    padding-bottom: 30px;
+    display: flex;
+}
+
+.imgCar{
+    width: 259px;
+    height: 183px;
+}
+
+.btn-eliminar{
+    float: right;
+}
