@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs.Rol
+namespace Application.DTOs.Entidades.RolDTOs
 {
     public class RolRequestDTO
     {

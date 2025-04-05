@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 
-
-namespace Application.Interfaces
+namespace Application.Interfaces.Entidades.RolInterfaces
 {
     public interface IRolRepository
     {

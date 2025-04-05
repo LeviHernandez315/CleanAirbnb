@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence;
 using Domain.Entities;
-using Application.Interfaces;
+using Application.Interfaces.Entidades.Rol;
 
 namespace Infrastructure.Repositories
 {
