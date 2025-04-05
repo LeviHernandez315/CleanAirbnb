@@ -21,7 +21,7 @@ namespace Infrastructure
              services.AddScoped<IRolRepository, RolRepository>();
             services.AddScoped<IRolService, RolService>();
 
-            services.AddScoped<IAreasTrabajoRepository, AreasTrabajoRepository>();
+           /* services.AddScoped<IAreasTrabajoRepository, AreasTrabajoRepository>();
             services.AddScoped<IAreasTrabajoService, AreasTrabajoService>();
 
             services.AddScoped<ICiudadesRepository, CiudadesRepository>();
@@ -102,7 +102,7 @@ namespace Infrastructure
 
 
             services.AddScoped<IVehiculoRepository, VehiculoRepository>();
-            services.AddScoped<IVehiculoService, VehiculoService>();
+            services.AddScoped<IVehiculoService, VehiculoService>(); */
 
 
 
