@@ -1,4 +1,4 @@
-let usuarios2 = [];
+/*let usuarios2 = [];
 
 
 const obtenerValores = () => {
@@ -94,3 +94,86 @@ const comparar=()=>{
     });
     // console.log(clientes[0].correo)
 }
+
+*/
+
+const obtenerValores = async () => {
+    // Obtener valores del formulario
+    const dni = document.getElementById("dni").value.trim();
+    const rtn = document.getElementById("rtn").value.trim();
+    const primerNombre = document.getElementById("primerNombre").value.trim();
+    const segundoNombre = document.getElementById("segundoNombre").value.trim();
+    const primerApellido = document.getElementById("primerApellido").value.trim();
+    const segundoApellido = document.getElementById("segundoApellido").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const edad = document.getElementById("edad").value.trim();
+    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+    const telefono = document.getElementById("telefono").value.trim();
+
+    // Validar que los campos obligatorios estén llenos
+    if (!dni || !primerNombre || !primerApellido || !correo || !password || !edad || !fechaNacimiento /*|| !telefono*/) {
+        alert("Por favor completa todos los campos obligatorios.");
+        return;
+    }
+
+    try {
+        // 1. Crear Persona
+        const personaResponse = await fetch("http://localhost:5139/api/personas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dni,
+                rtn: rtn || null,
+                primerNombre,
+                segundoNombre: segundoNombre || null,
+                primerApellido,
+                segundoApellido: segundoApellido || null,
+                edad: parseInt(edad),
+                fechaNacimiento
+            })
+        });
+
+        if (!personaResponse.ok) throw new Error("Error al registrar la persona.");
+
+        // 2. Crear Teléfono
+       /* const telefonoResponse = await fetch("http://localhost:5139/api/telefonos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                numTelefono: telefono,
+                idPersona: dni,
+                personaDNI: dni
+            })
+        });*/
+
+        //if (!telefonoResponse.ok) throw new Error("Error al registrar el teléfono.");
+
+        // 3. Crear Usuario
+        const usuarioResponse = await fetch("http://localhost:5139/api/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: correo,
+                password,
+                dni,
+                rolId: 1 // Cliente
+            })
+        });
+
+        if (!usuarioResponse.ok) throw new Error("Error al registrar el usuario.");
+
+        alert("Registro exitoso. Ahora puedes iniciar sesión.");
+        window.location.href = "login.html";
+
+    } catch (error) {
+        console.error("Error en el registro:", error);
+        alert("Ocurrió un error durante el registro:\n" + error.message);
+    }
+};
