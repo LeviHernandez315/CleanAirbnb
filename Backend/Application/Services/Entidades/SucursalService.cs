@@ -18,8 +18,12 @@ namespace Application.Services.Entidades
             var items = await _sucursalRepository.GetAllAsync();
             return items.Select(e => new SucursalResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = e.Id,
+                Nombre = e.Nombre,
+                IdDireccion = e.IdDireccion,
+                Telefono = e.Telefono,
+                CodigoSAR = e.CodigoSAR,
+                IdEmpresa = e.IdEmpresa
             });
         }
 
@@ -27,10 +31,15 @@ namespace Application.Services.Entidades
         {
             var item = await _sucursalRepository.GetByIdAsync(id);
             if (item == null) return null;
+
             return new SucursalResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Nombre = item.Nombre,
+                IdDireccion = item.IdDireccion,
+                Telefono = item.Telefono,
+                CodigoSAR = item.CodigoSAR,
+                IdEmpresa = item.IdEmpresa
             };
         }
 
@@ -38,15 +47,23 @@ namespace Application.Services.Entidades
         {
             var item = new Sucursal
             {
-                // TODO: Mapear desde dto a entidad
+                Nombre = dto.Nombre,
+                IdDireccion = dto.IdDireccion,
+                Telefono = dto.Telefono,
+                CodigoSAR = dto.CodigoSAR,
+                IdEmpresa = dto.IdEmpresa
             };
 
             await _sucursalRepository.AddAsync(item);
 
             return new SucursalResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Nombre = item.Nombre,
+                IdDireccion = item.IdDireccion,
+                Telefono = item.Telefono,
+                CodigoSAR = item.CodigoSAR,
+                IdEmpresa = item.IdEmpresa
             };
         }
 
@@ -55,7 +72,11 @@ namespace Application.Services.Entidades
             var item = await _sucursalRepository.GetByIdAsync(id);
             if (item == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            item.Nombre = dto.Nombre;
+            item.IdDireccion = dto.IdDireccion;
+            item.Telefono = dto.Telefono;
+            item.CodigoSAR = dto.CodigoSAR;
+            item.IdEmpresa = dto.IdEmpresa;
 
             return await _sucursalRepository.UpdateAsync(item);
         }
