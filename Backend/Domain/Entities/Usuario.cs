@@ -16,5 +16,12 @@ namespace Domain.Entities
         public Persona? Persona { get; set; }
         public Rol? Rol { get; set; }
 
+        //public Usuario(string? email, string? password, string? dni, int rolId)
+        //{
+        //    Email = email;
+        //    Password = password;
+        //    Dni = dni;
+        //    RolId = rolId;
+        //}
     }
 }
