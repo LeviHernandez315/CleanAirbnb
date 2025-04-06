@@ -1,4 +1,4 @@
-
+/*
 var metodos='';
 let nomCrrr= localStorage.getItem("ppreee");
 let norrr= localStorage.getItem("totaVehiculo");
@@ -103,4 +103,30 @@ const obtenerrrrrr = async () => {
    // listaMetodosPago();
 };
 
-obtenerrrrrr();
+obtenerrrrrr();  */
+
+// Obtener precios de la casa y vehículos
+const precioCasa = parseFloat(localStorage.getItem("ppreee")) || 0;
+const precioVehiculo = parseFloat(localStorage.getItem("totaVehiculo")) || 0;
+const totalReserva = precioCasa + precioVehiculo;
+
+// Mostrar total en pantalla
+document.getElementById('tao').textContent = `Total a Pagar: L. ${totalReserva}`;
+
+// Función para continuar
+function cambiar() {
+  // Validar que todos los campos estén llenos (opcional)
+  const nombre = document.getElementById("nombreTarjeta").value;
+  const numero = document.getElementById("numeroTarjeta").value;
+  const expira = document.getElementById("expira").value;
+  const mes = document.getElementById("mes").value;
+  const cvv = document.getElementById("cvv").value;
+
+  if (!nombre || !numero || !expira || !mes || !cvv) {
+    alert("Por favor complete todos los campos del método de pago.");
+    return;
+  }
+
+  localStorage.setItem("totalFinalPago", totalReserva);
+  window.location.href = "factura.html";
+}

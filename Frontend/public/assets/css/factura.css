@@ -1,78 +1,48 @@
-
 body {
     font-family: Arial, sans-serif;
-    
-   background-color:rgb(220, 230, 242) !important;
-   padding: 10px;
-
- 
-}
-#Contenidos{
-   padding: 20px;
-  
-    display:flex;
-    justify-content: space-around;
-  /*  grid-template-columns: 1fr 1fr;
-    column-gap: 15px;
-    row-gap: 30px; */
-
-}
-
-#alinaciones{
-    display:grid;
-    align-items:  flex-end;
-    height: 500px;
-
-}
-.Factura{
-    background-color:white;
-    max-width:540px;
+    background-color: rgb(220, 230, 242);
     padding: 20px;
-    border-radius: 2%;
+  }
   
-}
-
-.container {
-    width: 600px;
-    margin: 0 auto;
-}
-
-h1 {
+  h2 {
     text-align: center;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.header-item {
-    font-weight: bold;
-}
-
-.emisor, .receptor {
-    margin-top: 20px;
-}
-
-.emisor-info, .receptor-info {
-    margin-bottom: 5px;
-}
-
-.servicios {
-    margin-top: 20px;
-}
-
-.servicios h2 {
-    margin-bottom: 10px;
-}
-
-table.items {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table.items th, table.items td {
-    border: 1px solid #ccc;
-    padding: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .card img {
+    object-fit: cover;
+    height: 200px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .text-end {
+      text-align: left !important;
     }
+  }
+  
+  /* Estilos específicos de la factura */
+  .bg-white {
+    background-color: white !important;
+  }
+  
+  .rounded {
+    border-radius: 0.5rem;
+  }
+  
+  .shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  p, span {
+    font-size: 16px;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+  }
+  
