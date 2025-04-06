@@ -7,12 +7,12 @@ namespace Domain.Entities
     public class Vehiculo:Entity
     {
         public int IdModelo { get; set; }
-
         public int IdDireccion { get; set; }
         public int Año { get; set; }
         public int IdTipoVehiculo { get; set; }
         public decimal PrecioDia { get; set; }
         public int IdEstadoReserva { get; set; }
+        public string ImagenUrl { get; set; }
 
         // Navegación
         public Modelo? Modelo { get; set; }

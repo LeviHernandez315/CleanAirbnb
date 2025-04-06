@@ -22,6 +22,7 @@ namespace Domain.Entities
         public int IdAnfitrion { get; set; }
         public int IdEstadoReserva { get; set; }
         public decimal MediaValoracion { get; set; }
+        public string ImagenUrl { get; set; }
 
         // Navegación
         public Direccion? Direccion { get; set; }

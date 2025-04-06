@@ -14,5 +14,6 @@ namespace Application.DTOs.Entidades.PropiedadDTOs
             public int IdAnfitrion { get; set; }
             public int IdEstadoReserva { get; set; }
             public decimal MediaValoracion { get; set; }
-        }
+            public string ImagenUrl { get; set; }
+    }
     }

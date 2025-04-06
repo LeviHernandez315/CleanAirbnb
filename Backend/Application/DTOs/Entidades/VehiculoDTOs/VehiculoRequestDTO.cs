@@ -8,5 +8,6 @@ namespace Application.DTOs.Entidades.VehiculoDTOs
             public int IdTipoVehiculo { get; set; }
             public decimal PrecioDia { get; set; }
             public int IdEstadoReserva { get; set; }
-        }
+            public string ImagenUrl { get; set; }
+    }
     }
