@@ -31,23 +31,35 @@
     </nav>
 
     <main><!-- Este es el main o la pagina principal -->
-      <div class="card" style="width: 18rem;">
-        <div  class="card-header">
-          Vehiculos Agregados
+      <main>
+        <div class="contenido-principal">
+          <div class="sidebar">
+            <div class="card">
+              <div class="card-header">Vehículos Agregados</div>
+              <div id="listaCarros"></div>
+              <div class="card-footer">Card footer</div>
+            </div>
+          </div>
+      
+          <div class="tarjetas">
+            <div id="idparaRendVehi" class="row">
+              <!-- Tarjeta individual -->
+              <div class="col-md-3">
+                <div class="card mb-4">
+                  <img src="assets/img/vehiculo1.png" class="imgCar" alt="Vehicle 1">
+                  <div class="card-body">
+                    <h5 class="card-title text-black">KIA Morning</h5>
+                    <p class="card-text text-black">4 cilindros, motor 1.0 económico Manual</p>
+                    <p class="card-text text-black">Precio por día: L.750.00</p>
+                    <button onclick="pasarFactura()" type="button" class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="listaCarros">
-        
-        <div class="card-footer">
-          Card footer
-        </div>
-      </div>
-      <div id="prex" class="card-header">
-        
-      </div>
-      </div>
-
-      <div class="container">
-        <div id="idparaRendVehi" class="row">
+      </main>
+      
 <!-- ------------------------------------------------------------------------------------>
 <!-- dentro de las lineas que estan punteadas estaran las renderizaiones -->
 

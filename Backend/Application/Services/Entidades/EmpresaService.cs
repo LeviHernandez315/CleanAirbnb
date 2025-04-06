@@ -18,8 +18,12 @@ namespace Application.Services.Entidades
             var items = await _empresaRepository.GetAllAsync();
             return items.Select(e => new EmpresaResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = e.Id,
+                Nombre = e.Nombre,
+                Rtn = e.Rtn,
+                Correo = e.Correo,
+                CasaMatriz = e.CasaMatriz,
+                Telefono = e.Telefono
             });
         }
 
@@ -27,10 +31,15 @@ namespace Application.Services.Entidades
         {
             var item = await _empresaRepository.GetByIdAsync(id);
             if (item == null) return null;
+
             return new EmpresaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Nombre = item.Nombre,
+                Rtn = item.Rtn,
+                Correo = item.Correo,
+                CasaMatriz = item.CasaMatriz,
+                Telefono = item.Telefono
             };
         }
 
@@ -38,15 +47,23 @@ namespace Application.Services.Entidades
         {
             var item = new Empresa
             {
-                // TODO: Mapear desde dto a entidad
+                Nombre = dto.Nombre,
+                Rtn = dto.Rtn,
+                Correo = dto.Correo,
+                CasaMatriz = dto.CasaMatriz,
+                Telefono = dto.Telefono
             };
 
             await _empresaRepository.AddAsync(item);
 
             return new EmpresaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Nombre = item.Nombre,
+                Rtn = item.Rtn,
+                Correo = item.Correo,
+                CasaMatriz = item.CasaMatriz,
+                Telefono = item.Telefono
             };
         }
 
@@ -55,9 +72,14 @@ namespace Application.Services.Entidades
             var item = await _empresaRepository.GetByIdAsync(id);
             if (item == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            item.Nombre = dto.Nombre;
+            item.Rtn = dto.Rtn;
+            item.Correo = dto.Correo;
+            item.CasaMatriz = dto.CasaMatriz;
+            item.Telefono = dto.Telefono;
 
-            return await _empresaRepository.UpdateAsync(item);
+            var updated = await _empresaRepository.UpdateAsync(item);
+            return updated != null;
         }
 
         public async Task<bool> DeleteAsync(int id)
