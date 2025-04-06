@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Application.DTOs.Entidades.MetodoPagoDTOs;
 using Application.Interfaces.Entidades.MetodoPagoInterfaces;
 using Domain.Entities;
@@ -11,20 +7,19 @@ namespace Application.Services.Entidades
 {
     public class MetodoPagoService: IMetodoPagoService
     {
-        private readonly IMetodoPagoRepository _repository;
+        private readonly IMetodoPagoRepository _metodoPagoRepository;
 
-        // Constructor que recibe el repositorio por inyección de dependencias
-        public MetodoPagoService(IMetodoPagoRepository repository)
+        
+        public MetodoPagoService(IMetodoPagoRepository metodoPagoRepository)
         {
-            _repository = repository;
+            _metodoPagoRepository = metodoPagoRepository;
         }
 
-        // Obtener todos los métodos de pago existentes
+
         public async Task<IEnumerable<MetodoPagoResponseDTO>> GetAllAsync()
         {
-            var lista = await _repository.GetAllAsync();
+            var lista = await _metodoPagoRepository.GetAllAsync();
 
-            // Convertimos las entidades del dominio en DTOs de respuesta
             return lista.Select(m => new MetodoPagoResponseDTO
             {
                 Id = m.Id,
@@ -32,10 +27,10 @@ namespace Application.Services.Entidades
             });
         }
 
-        // Obtener un método de pago por su ID
+      
         public async Task<MetodoPagoResponseDTO> GetByIdAsync(int id)
         {
-            var metodo = await _repository.GetByIdAsync(id);
+            var metodo = await _metodoPagoRepository.GetByIdAsync(id);
 
             if (metodo == null)
                 throw new Exception("Método de pago no encontrado");
@@ -47,7 +42,7 @@ namespace Application.Services.Entidades
             };
         }
 
-        // Crear un nuevo método de pago
+      
         public async Task<MetodoPagoResponseDTO> CreateAsync(MetodoPagoRequestDTO dto)
         {
             var nuevoMetodo = new MetodoPago
@@ -55,7 +50,7 @@ namespace Application.Services.Entidades
                 Descripcion = dto.Descripcion
             };
 
-            var metodoPago = await _repository.CreateAsync(nuevoMetodo);
+            var metodoPago = await _metodoPagoRepository.CreateAsync(nuevoMetodo);
 
             return new MetodoPagoResponseDTO
             {
@@ -64,26 +59,24 @@ namespace Application.Services.Entidades
             };
         }
 
-        // Actualizar un método de pago 
+       
         public async Task<bool> UpdateAsync(int id, MetodoPagoRequestDTO dto)
         {
-            var metodoPago = await _repository.GetByIdAsync(id);
+            var metodoPago = await _metodoPagoRepository.GetByIdAsync(id);
 
             if (metodoPago == null)
                 return false;
 
             metodoPago.Descripcion = dto.Descripcion;
 
-            return await _repository.UpdateAsync(metodoPago);
+            return await _metodoPagoRepository.UpdateAsync(metodoPago);
         }
 
-        // Eliminar un método de pago por su ID
+      
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _repository.DeleteAsync(id);
+            return await _metodoPagoRepository.DeleteAsync(id);
         }
-
-
 
     }
 }

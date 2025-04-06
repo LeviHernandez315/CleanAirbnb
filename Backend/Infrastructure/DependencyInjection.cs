@@ -46,6 +46,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
 using Application.Interfaces.Entidades.MetodoPagoInterfaces;
 using Application.Interfaces.Entidades.TelefonoInterfaces;
+using Application.Interfaces.Entidades.ValoracionInterfaces;
 namespace Infrastructure
 {
 
@@ -142,8 +143,8 @@ namespace Infrastructure
             services.AddScoped <ITelefonoRepository, TelefonoRepository>();
             services.AddScoped<ITelefonoService, TelefonoService>();
 
-            /*services.AddScoped<IValoracionRepository, ValoracionRepository>();
-           services.AddScoped<IValoracionService, ValoracionService>();*/
+           services.AddScoped<IValoracionRepository, ValoracionRepository>();
+           services.AddScoped<IValoracionService, ValoracionService>();
 
             services.AddScoped<ITipoVehiculoRepository, TipoVehiculoRepository>();
             services.AddScoped<ITipoVehiculoService, TipoVehiculoService>();
