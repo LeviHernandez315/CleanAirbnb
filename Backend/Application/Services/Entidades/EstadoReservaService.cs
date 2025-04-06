@@ -18,8 +18,8 @@ namespace Application.Services.Entidades
             var items = await _estadoreservaRepository.GetAllAsync();
             return items.Select(e => new EstadoReservaResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = e.Id,
+                Descripcion = e.Descripcion
             });
         }
 
@@ -27,10 +27,11 @@ namespace Application.Services.Entidades
         {
             var item = await _estadoreservaRepository.GetByIdAsync(id);
             if (item == null) return null;
+
             return new EstadoReservaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Descripcion = item.Descripcion
             };
         }
 
@@ -38,15 +39,15 @@ namespace Application.Services.Entidades
         {
             var item = new EstadoReserva
             {
-                // TODO: Mapear desde dto a entidad
+                Descripcion = dto.Descripcion
             };
 
             await _estadoreservaRepository.AddAsync(item);
 
             return new EstadoReservaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = item.Id,
+                Descripcion = item.Descripcion
             };
         }
 
@@ -55,7 +56,7 @@ namespace Application.Services.Entidades
             var item = await _estadoreservaRepository.GetByIdAsync(id);
             if (item == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            item.Descripcion = dto.Descripcion;
 
             return await _estadoreservaRepository.UpdateAsync(item);
         }

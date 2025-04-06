@@ -32,8 +32,8 @@ namespace API.Controllers.EntitiesControllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PaisRequestDTO dto)
         {
-            var ciudad = await _paisService.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = ciudad.Id }, ciudad);
+            var pais = await _paisService.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = pais.Id }, pais);
         }
 
         [HttpPut("{id}")]
