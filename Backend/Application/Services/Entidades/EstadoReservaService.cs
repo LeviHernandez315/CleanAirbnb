@@ -15,49 +15,50 @@ namespace Application.Services.Entidades
 
         public async Task<IEnumerable<EstadoReservaResponseDTO>> GetAllAsync()
         {
-            var items = await _estadoreservaRepository.GetAllAsync();
-            return items.Select(e => new EstadoReservaResponseDTO
+            var estadoReservas = await _estadoreservaRepository.GetAllAsync();
+            return estadoReservas.Select(er => new EstadoReservaResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = er.Id,
+                Descripcion = er.Descripcion
             });
         }
 
         public async Task<EstadoReservaResponseDTO?> GetByIdAsync(int id)
         {
-            var item = await _estadoreservaRepository.GetByIdAsync(id);
-            if (item == null) return null;
+            var estadoReserva = await _estadoreservaRepository.GetByIdAsync(id);
+            if (estadoReserva == null) return null;
             return new EstadoReservaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = estadoReserva.Id,
+                Descripcion = estadoReserva.Descripcion
+                
             };
         }
 
         public async Task<EstadoReservaResponseDTO> CreateAsync(EstadoReservaRequestDTO dto)
         {
-            var item = new EstadoReserva
+            var estadoReserva = new EstadoReserva
             {
-                // TODO: Mapear desde dto a entidad
+                Descripcion = dto.Descripcion
             };
 
-            await _estadoreservaRepository.AddAsync(item);
+            await _estadoreservaRepository.AddAsync(estadoReserva);
 
             return new EstadoReservaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = estadoReserva.Id,
+                Descripcion = estadoReserva.Descripcion
             };
         }
 
         public async Task<bool> UpdateAsync(int id, EstadoReservaRequestDTO dto)
         {
-            var item = await _estadoreservaRepository.GetByIdAsync(id);
-            if (item == null) return false;
+            var estadoReserva = await _estadoreservaRepository.GetByIdAsync(id);
+            if (estadoReserva == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            estadoReserva.Descripcion = dto.Descripcion;
 
-            return await _estadoreservaRepository.UpdateAsync(item);
+            return await _estadoreservaRepository.UpdateAsync(estadoReserva);
         }
 
         public async Task<bool> DeleteAsync(int id)
