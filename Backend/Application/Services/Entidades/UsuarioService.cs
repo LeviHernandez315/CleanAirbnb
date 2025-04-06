@@ -1,6 +1,7 @@
 using Application.DTOs.Entidades.UsuarioDTOs;
 using Application.Interfaces.Entidades.UsuarioInterfaces;
 using Domain.Entities;
+using System.Net;
 
 namespace Application.Services.Entidades
 {
@@ -36,16 +37,23 @@ namespace Application.Services.Entidades
 
         public async Task<UsuarioResponseDTO> CreateAsync(UsuarioRequestDTO dto)
         {
-            var item = new Usuario
+            var usuario = new Usuario
             {
-                // TODO: Mapear desde dto a entidad
-            };
+                Email = dto.Email,
+                Password = dto.Password,
+                Dni = dto.Dni,
+                RolId = dto.RolId
 
-            await _usuarioRepository.AddAsync(item);
+            };
+                
+           
+            await _usuarioRepository.AddAsync(usuario);
 
             return new UsuarioResponseDTO
             {
-                Id = item.Id
+                Id = usuario.Id,
+                Email = usuario.Email
+
                 // TODO: Mapear propiedades restantes
             };
         }
