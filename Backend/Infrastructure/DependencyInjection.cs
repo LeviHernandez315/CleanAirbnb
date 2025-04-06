@@ -44,6 +44,7 @@ using Infrastructure.Repositories;
 
 using Microsoft.Extensions.DependencyInjection;
 using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
+using Application.Interfaces.Entidades.MetodoPagoInterfaces;
 namespace Infrastructure
 {
 
@@ -108,8 +109,8 @@ namespace Infrastructure
 
 
 
-            /*services.AddScoped<IMetodoPagoRepository, MetodPagoRepository>();
-            services.AddScoped<IMetodoPagoService, MetodosPagoService>();*/
+            services.AddScoped<IMetodoPagoRepository, MetodoPagoRepository>();
+            services.AddScoped<IMetodoPagoService, MetodoPagoService>();
 
             services.AddScoped<IModeloRepository, ModeloRepository>();
             services.AddScoped<IModeloService, ModeloService>();
