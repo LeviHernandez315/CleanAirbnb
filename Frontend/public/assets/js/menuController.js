@@ -1,4 +1,4 @@
-let propiedades = [];
+/*let propiedades = [];
 let idCliente= localStorage.getItem("cliente");
 let nomCliente= localStorage.getItem("email");
 let nomClienteCompleto= localStorage.getItem("clientecomleto");
@@ -246,6 +246,106 @@ const insertarReserva = async (fechaCheckIn, fechaCheckOut, cantidadPersonas, id
 	);
 }
 
+ */
+//{/* <button type="button" class="btn btn-primary" onclick="reservarVehiculos(${k})">alquilar Vehiculo</button> */}
 
-{/* <button type="button" class="btn btn-primary" onclick="reservarVehiculos(${k})">alquilar Vehiculo</button> */}
+let propiedades = [];
+const idCliente = localStorage.getItem("usuario");
+const emailCliente = localStorage.getItem("email");
 
+// Mostrar nombre del usuario en el nav
+const renderizarNombreUsuario = () => {
+  const nombreUser = document.getElementById("nombreUser");
+  nombreUser.textContent = emailCliente || "Invitado";
+};
+
+// Obtener propiedades del backend
+const obtenerPropiedades = async () => {
+  try {
+    const respuesta = await fetch("http://localhost:5139/api/propiedads", {
+      method: "GET",
+    });
+    propiedades = await respuesta.json();
+    console.log("Propiedades:", propiedades);
+    renderizarPropiedades();
+  } catch (error) {
+    console.error("Error al obtener propiedades:", error);
+    alert("No se pudieron cargar las propiedades desde el servidor.");
+  }
+};
+
+// Renderizar todas las propiedades en tarjetas
+const renderizarPropiedades = () => {
+  const contenedor = document.getElementById("idRendCasa");
+  contenedor.innerHTML = "";
+
+  propiedades.forEach((prop, i) => {
+    contenedor.innerHTML += `
+      <div class="col-3 casa">
+        <div class="card">
+          <img src="${prop.imagenUrl}" class="card-img-top" alt="Imagen de propiedad">
+          <div class="tarjeta card-body">
+            <div class="info">
+              <i class="fa-solid fa-location-dot"></i>
+              <h5 class="card-title">${prop.nombre}</h5>
+            </div>
+            <div class="info">
+              <i class="fa-solid fa-money-bill"></i>
+              <p class="p-card card-text">${prop.precioPorNoche} Lps por noche</p>
+            </div>
+            <div class="info">
+              <i class="fa-solid fa-bed"></i>
+              <p class="p-card card-text">${prop.numeroHabitaciones} habitaciones</p>
+            </div>
+            <div class="info">
+              <i class="fa-solid fa-car"></i>
+              <p class="p-card card-text">Parqueo: ${prop.capacidadParqueo} vehículos</p>
+            </div>
+            <div>
+              ${renderizarEstrellas(prop.mediaValoracion || 0)}
+            </div>
+            <div class="boton">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="verDetallePropiedad(${i})">
+                Ver casa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+};
+
+// Mostrar estrellas de valoración
+const renderizarEstrellas = (valor) => {
+  let estrellas = "";
+  for (let i = 1; i <= 5; i++) {
+    estrellas += `<i class="fa-${i <= valor ? "solid" : "regular"} fa-star"></i>`;
+  }
+  return estrellas;
+};
+
+// Llenar el modal con la propiedad seleccionada
+const verDetallePropiedad = (i) => {
+  const prop = propiedades[i];
+  document.getElementById("exampleModalLabel").textContent = prop.nombre;
+  document.querySelector("#exampleModal .modal-body img").src = prop.imagenUrl;
+
+  // Guardar propiedad en localStorage para futuras páginas (reserva o vehículo)
+  localStorage.setItem("propiedad", JSON.stringify(prop));
+  localStorage.setItem("idPropiedad", prop.id);
+};
+
+// Redirección para alquilar vehículo
+const reservarVehiculos = () => {
+  window.location.href = "vehiculos.html";
+};
+
+// Redirección a la página de pago directo
+const irAPago = () => {
+  window.location.href = "pago.html";
+};
+
+// Inicialización
+renderizarNombreUsuario();
+obtenerPropiedades();

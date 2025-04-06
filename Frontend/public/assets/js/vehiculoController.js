@@ -1,184 +1,114 @@
+let vehiculos = [];
+let modelos = [];
+let tiposVehiculo = [];
+let vehiculosSeleccionados = [];
 
-let vehiculos=[];
-let ListaVehiculos=[];
-let uiui=[];
+const emailCliente = localStorage.getItem("email");
 
-let nomCliente= localStorage.getItem("email");
-let fechaCheckIn1 = localStorage.getItem("fechaCheckIn")
-let idPropiedad1 = localStorage.getItem("idPropiedad")
-let idHuesped1 = localStorage.getItem("idHuesped")
-let difDias1 = localStorage.getItem("difDias")
-let idReserva;
+// Mostrar el nombre del usuario
+const renderizarNombreUsuario = () => {
+  document.getElementById("nombreUsee").textContent = emailCliente || "Invitado";
+};
 
-// console.log(localStorage.getItem("qqqqq"));
+// Cargar datos desde el backend
+const cargarDatos = async () => {
+  try {
+    const [resVehiculos, resModelos, resTipos] = await Promise.all([
+      fetch("http://localhost:5139/api/vehiculos"),
+      fetch("http://localhost:5139/api/modelos"),
+      fetch("http://localhost:5139/api/tipovehiculo")
+    ]);
 
+    vehiculos = await resVehiculos.json();
+    modelos = await resModelos.json();
+    tiposVehiculo = await resTipos.json();
 
-const renderizaNombreUser= () =>{  
+    renderizarVehiculos();
+  } catch (error) {
+    console.error("Error al cargar datos:", error);
+    alert("Error al conectar con el servidor.");
+  }
+};
 
-    document.getElementById("nombreUsee").innerHTML= ""; 
-    document.getElementById("nombreUsee").innerHTML += 
-        `
-       ${ nomCliente}
-        `
-}
-renderizaNombreUser();
+// Obtener el nombre del modelo
+const getNombreModelo = (idModelo) => {
+  const modelo = modelos.find(m => m.id === idModelo);
+  return modelo ? modelo.descripcion : "Modelo desconocido";
+};
 
-const obtenerReserva = async () => {
-    const respuesta = await fetch(`http://localhost:3001/reservas/casa`,{
-        method: "post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            fechaCheckIn1: fechaCheckIn1,
-            idPropiedad1: idPropiedad1,
-            idHuesped1: idHuesped1,
-        }),
-    });
-    idReserva = respuesta;
-    console.log('idReserva', idReserva);
-}
+// Obtener el tipo de vehículo
+const getNombreTipo = (idTipo) => {
+  const tipo = tiposVehiculo.find(t => t.id === idTipo);
+  return tipo ? tipo.descripcion : "Tipo desconocido";
+};
 
-obtenerReserva();
+// Renderizar tarjetas de vehículos
+const renderizarVehiculos = () => {
+  const contenedor = document.getElementById("idparaRendVehi");
+  contenedor.innerHTML = "";
 
-console.log(localStorage.getItem("propiedad"));
-
-const obtenerVehiculos = async () => {
-	const respuesta = await fetch("http://localhost:3001/vehiculos", {
-		method: "get",
-	});
-	vehiculos = await respuesta.json();
-    veheiculoSeleccionado=vehiculos;
-	console.log("vehiculos", vehiculos);
-    renderizaVehiculos();
-}
-
-
-
-const renderizaVehiculos= () =>{  
-
-    document.getElementById("idparaRendVehi").innerHTML= "";
-    for( i=0; i<vehiculos.length;i++){
-        document.getElementById("idparaRendVehi").innerHTML += 
-        `
-        <div  class="col-md-3 border-primary">
-        <div class="card mb-4">
-          <img src="${vehiculos[i].urlImagen}" class="imgCar" alt="Vehicle 1">
+  vehiculos.forEach((vehiculo, index) => {
+    contenedor.innerHTML += `
+      <div class="col">
+        <div class="card h-100">
+          <img src="${vehiculo.imagenUrl}" class="imgCar" alt="Vehículo">
           <div class="card-body">
-            <h5 value="${vehiculos[i].idModelo}" class="card-title text-black">${vehiculos[i].marca} ${vehiculos[i].modelo}</h5>
-            <p class="card-text text-black">${vehiculos[i].tipoVehiculo}</p>
-            <p class="card-text text-black">Precio por día: L.${vehiculos[i].precioDia}</p>
-            <button onclick="agregarVehiculo(${i})" type="button" class="btn btn-primary">Agregar</button>
+            <h5 class="card-title text-black">${getNombreModelo(vehiculo.idModelo)}</h5>
+            <p class="card-text text-black">Año: ${vehiculo.año}</p>
+            <p class="card-text text-black">Tipo: ${getNombreTipo(vehiculo.idTipoVehiculo)}</p>
+            <p class="card-text text-black">Precio por día: L. ${vehiculo.precioDia}</p>
+            <button onclick="agregarVehiculo(${index})" type="button" class="btn btn-primary">Agregar</button>
           </div>
         </div>
-    </div>
-        `
-
-    }
-
-}
-obtenerVehiculos();
-
-
-
-
-const agregarVehiculo=(j)=>{
-  //  JSON.stringify(propiedades[o])
-  //  uiui.push(JSON.stringify(veheiculoSeleccionado[j]));
-  const objeto1 = { nombre:  `${veheiculoSeleccionado[j].marca}`, precio:  `${veheiculoSeleccionado[j].precioDia}`};
-  uiui.push(objeto1);
-  let poo=uiui.length;
-  localStorage.setItem("begii", poo);
-
-    console.log(poo);
-    renderizarListaVehiculos();
-}
-
-const renderizarListaVehiculos=()=>{
-    var jeyes=0;
-    document.getElementById("listaCarros").innerHTML="";
-    for( i=0; i<uiui.length ;i++){
-        t=parseFloat(uiui[i].precio);
-       jeyes+=t;
-        document.getElementById("listaCarros").innerHTML+=
-        `
-        <div class="card-footer">
-             ${uiui[i].nombre} valor: ${uiui[i].precio}
-            </div>
-    
-        `
-        document.getElementById("prex").innerHTML=` Valor Total: ${jeyes} 
-        <button id="mz" type="button" value=${jeyes} class="btn btn-primary" onclick="irAPagina()">Pagar</button>`
-    }
-   ;
-}
-
-const irAPagina=()=>{
-    localStorage.setItem("totaVehiculo", document.getElementById("mz").value);
-    window.location.href = "pago.html";
-    
-    console.log(document.getElementById("mz").value);
+      </div>
+    `;
+  });
 };
 
+// Agregar vehículo a la lista de seleccionados
+const agregarVehiculo = (index) => {
+  const vehiculo = vehiculos[index];
+  const yaAgregado = vehiculosSeleccionados.some(v => v.id === vehiculo.id);
 
-const pasarFactura=(m)=>{
-    //propiedades[o].id;
-    localStorage.setItem("vehiculo", vehiculos[m]);
-   // window.location.href = "factura.html";
+  if (!yaAgregado) {
+    vehiculosSeleccionados.push(vehiculo);
+    renderizarVehiculosSeleccionados();
+  }
 };
 
+// Mostrar vehículos agregados en el sidebar
+const renderizarVehiculosSeleccionados = () => {
+  const lista = document.getElementById("listaCarros");
+  lista.innerHTML = "";
 
+  vehiculosSeleccionados.forEach((v, i) => {
+    lista.innerHTML += `
+      <div class="text-black p-2 border-bottom">
+        <p>${getNombreModelo(v.idModelo)} - L. ${v.precioDia}</p>
+        <button onclick="removerVehiculo(${i})" class="btn btn-sm btn-danger">Quitar</button>
+      </div>
+    `;
+  });
 
-
-const obtenerMarca = async () => {
-	const respuesta = await fetch("http://localhost:3001/vehiculos/marca", {
-		method: "get",
-	});
-	marca = await respuesta.json();
-	console.log("marca", marca);
-    //renderizaVehiculos();
+  localStorage.setItem("vehiculosSeleccionados", JSON.stringify(vehiculosSeleccionados));
 };
 
-obtenerMarca();
-
-const obtenerModelo = async () => {
-	const respuesta = await fetch("http://localhost:3001/vehiculos/modelo", {
-		method: "get",
-	});
-	modelo = await respuesta.json();
-	console.log("marca", modelo);
-    //renderizaVehiculos();
+// Quitar vehículo de la lista
+const removerVehiculo = (index) => {
+  vehiculosSeleccionados.splice(index, 1);
+  renderizarVehiculosSeleccionados();
 };
 
-obtenerModelo();
+// Redirigir a la siguiente página
+const pasarFactura = () => {
+  if (vehiculosSeleccionados.length === 0) {
+    alert("Debes seleccionar al menos un vehículo.");
+    return;
+  }
 
-
-const obtenerTipoVe = async () => {
-	const respuesta = await fetch("http://localhost:3001/vehiculos/modelo", {
-		method: "get",
-	});
-	tipoVeh = await respuesta.json();
-	console.log("marca", tipoVeh );
-    //renderizaVehiculos();
+  window.location.href = "pago.html";
 };
 
-obtenerTipoVe();
-
-const obtenerrrrrr = async () => {
-	const respuesta = await fetch("http://localhost:3001/reservas/casass", {
-		method: "get",
-	});
-	metodosrrrr = await respuesta.json();
-    console.log("Metoress", metodosrrrr);
-   // listaMetodosPago();
-};
-
-obtenerrrrrr();
-
-
-  
-
-
-
-
+// Inicialización
+renderizarNombreUsuario();
+cargarDatos();
