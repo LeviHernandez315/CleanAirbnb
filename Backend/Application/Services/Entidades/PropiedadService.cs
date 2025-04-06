@@ -30,7 +30,8 @@ namespace Application.Services.Entidades
                 PrecioPorNoche = pr.PrecioPorNoche,
                 IdAnfitrion = pr.IdAnfitrion,
                 IdEstadoReserva = pr.IdEstadoReserva,
-                MediaValoracion = pr.MediaValoracion
+                MediaValoracion = pr.MediaValoracion,
+                ImagenUrl = pr.ImagenUrl
             });
         }
 
@@ -51,7 +52,8 @@ namespace Application.Services.Entidades
                 PrecioPorNoche = propiedad.PrecioPorNoche,
                 IdAnfitrion = propiedad.IdAnfitrion,
                 IdEstadoReserva = propiedad.IdEstadoReserva,
-                MediaValoracion = propiedad.MediaValoracion
+                MediaValoracion = propiedad.MediaValoracion,
+                ImagenUrl = propiedad.ImagenUrl
             };
         }
 
@@ -69,7 +71,8 @@ namespace Application.Services.Entidades
                 PrecioPorNoche = dto.PrecioPorNoche,
                 IdAnfitrion = dto.IdAnfitrion,
                 IdEstadoReserva = dto.IdEstadoReserva,
-                MediaValoracion = dto.MediaValoracion
+                MediaValoracion = dto.MediaValoracion,
+                ImagenUrl = dto.ImagenUrl
             };
 
             await _propiedadRepository.AddAsync(propiedad);
@@ -87,7 +90,8 @@ namespace Application.Services.Entidades
                 PrecioPorNoche = propiedad.PrecioPorNoche,
                 IdAnfitrion = propiedad.IdAnfitrion,
                 IdEstadoReserva = propiedad.IdEstadoReserva,
-                MediaValoracion = propiedad.MediaValoracion
+                MediaValoracion = propiedad.MediaValoracion,
+                ImagenUrl = propiedad.ImagenUrl
             };
         }
 
@@ -107,6 +111,7 @@ namespace Application.Services.Entidades
             propiedad.IdAnfitrion = dto.IdAnfitrion;
             propiedad.IdEstadoReserva = dto.IdEstadoReserva;
             propiedad.MediaValoracion = dto.MediaValoracion;
+            propiedad.ImagenUrl = dto.ImagenUrl;
 
             return await _propiedadRepository.UpdateAsync(propiedad);
         }

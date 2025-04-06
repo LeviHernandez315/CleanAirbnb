@@ -24,7 +24,8 @@ namespace Application.Services.Entidades
                 Año = v.Año,
                 IdTipoVehiculo = v.IdTipoVehiculo,
                 PrecioDia = v.PrecioDia,
-                IdEstadoReserva = v.IdEstadoReserva
+                IdEstadoReserva = v.IdEstadoReserva,
+                ImagenUrl = v.ImagenUrl
             });
         }
 
@@ -40,7 +41,8 @@ namespace Application.Services.Entidades
                 Año = vehiculo.Año,
                 IdTipoVehiculo = vehiculo.IdTipoVehiculo,
                 PrecioDia = vehiculo.PrecioDia,
-                IdEstadoReserva = vehiculo.IdEstadoReserva
+                IdEstadoReserva = vehiculo.IdEstadoReserva,
+                ImagenUrl = vehiculo.ImagenUrl
 
             };
         }
@@ -54,7 +56,8 @@ namespace Application.Services.Entidades
                 Año = dto.Año,
                 IdTipoVehiculo = dto.IdTipoVehiculo,
                 PrecioDia = dto.PrecioDia,
-                IdEstadoReserva = dto.IdEstadoReserva
+                IdEstadoReserva = dto.IdEstadoReserva,
+                ImagenUrl = dto.ImagenUrl
             };
 
             await _vehiculoRepository.AddAsync(vehiculo);
@@ -67,7 +70,8 @@ namespace Application.Services.Entidades
                 Año = vehiculo.Año,
                 IdTipoVehiculo = vehiculo.IdTipoVehiculo,
                 PrecioDia = vehiculo.PrecioDia,
-                IdEstadoReserva = vehiculo.IdEstadoReserva
+                IdEstadoReserva = vehiculo.IdEstadoReserva,
+                ImagenUrl = vehiculo.ImagenUrl
             };
         }
 
@@ -82,6 +86,7 @@ namespace Application.Services.Entidades
             vehiculo.IdTipoVehiculo = dto.IdTipoVehiculo;
             vehiculo.PrecioDia = dto.PrecioDia;
             vehiculo.IdEstadoReserva = dto.IdEstadoReserva;
+            vehiculo.ImagenUrl = dto.ImagenUrl;
 
             return await _vehiculoRepository.UpdateAsync(vehiculo);
         }
