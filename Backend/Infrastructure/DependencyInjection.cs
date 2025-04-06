@@ -25,13 +25,16 @@ using Application.Interfaces.AggregateRoots.ReservaInterfaces;
 using Application.Interfaces.AggregateRoots.ReservaVehiculoInterfaces; 
 using Application.Interfaces.Entidades.RolInterfaces;
 using Application.Interfaces.Entidades.SucursalInterfaces;
+using Application.Interfaces.Entidades.MarcaInterfaces;
+using Application.Interfaces.Entidades.ModeloInterfaces;
+
 /*
 using Application.Interfaces.Entidades.TelefonoInterfaces;
 using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
 using Application.Interfaces.Entidades.MarcaInterfaces;
 using Application.Interfaces.Entidades.MetodoPagoInterfaces;
-using Application.Interfaces.Entidades.ValoracionInterfaces;
-using Application.Interfaces.Entidades.ModeloInterfaces; */
+using Application.Interfaces.Entidades.ValoracionInterfaces;*/
+using Application.Interfaces.Entidades.ModeloInterfaces; 
 using Application.Interfaces.Entidades.UsuarioInterfaces;
 
 using Application.Interfaces.Entidades.VehiculoInterfaces; 
@@ -98,16 +101,19 @@ namespace Infrastructure
 
             services.AddScoped<IEstadoReservaRepository, EstadoReservaRepository>();
             services.AddScoped<IEstadoReservaService, EstadoReservaService>();
-             /*
-            services.AddScoped<IMarcaRepository, MarcaRepository>();
-            services.AddScoped<IMarcaService, MarcaService>();
 
-            services.AddScoped<IMetodoPagoRepository, MetodPagoRepository>();
-            services.AddScoped<IMetodoPagoService, MetodosPagoService>();
+            services.AddScoped<IMarcaRepository, MarcaRepository>();
+            services.AddScoped <IMarcaService, MarcaService>();
+
+
+
+
+            /*services.AddScoped<IMetodoPagoRepository, MetodPagoRepository>();
+            services.AddScoped<IMetodoPagoService, MetodosPagoService>();*/
 
             services.AddScoped<IModeloRepository, ModeloRepository>();
             services.AddScoped<IModeloService, ModeloService>();
-             */
+             
 
 
             services.AddScoped<IPropiedadRepository, PropiedadRepository>();
