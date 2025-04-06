@@ -3,7 +3,7 @@ let valorCorreo;
 let valorContraseña;
 
 const obtenerUsuarios = async () => {
-	const respuesta = await fetch("http://localhost:3001/personas", {
+	const respuesta = await fetch("http://localhost:5139/api/usuarios", {
 		method: "get",
 	});
 	usuarios = await respuesta.json();
@@ -26,11 +26,11 @@ const validarContraseña = () => {
 const compararUsuarios=()=>{
     
     usuarios.forEach(element => {
-        if((element.email == valorCorreo)&&(element.contraseña== valorContraseña)){
+        if((element.Email == valorCorreo)&&(element.Password== valorContraseña)){
             // console.log('usuario aceptado');
-            localStorage.setItem("clientecomleto", JSON.stringify(element));
-             localStorage.setItem("cliente", element.id);
-             localStorage.setItem("email", element.email);
+            localStorage.setItem("usuarioCompleto", JSON.stringify(element));
+             localStorage.setItem("usuario", element.id);
+             localStorage.setItem("email", element.Email);
             window.location.href = "menu.html";
             // console.log('usuario aceptado');
         }
