@@ -1,5 +1,6 @@
 using Application.DTOs.Entidades.DetalleFacturaDTOs;
 using Application.Interfaces.Entidades.DetalleFacturaInterfaces;
+using Domain.AggregateRoots;
 using Domain.Entities;
 
 namespace Application.Services.Entidades
@@ -15,49 +16,70 @@ namespace Application.Services.Entidades
 
         public async Task<IEnumerable<DetalleFacturaResponseDTO>> GetAllAsync()
         {
-            var items = await _detallefacturaRepository.GetAllAsync();
-            return items.Select(e => new DetalleFacturaResponseDTO
+            var detalleFacturas = await _detallefacturaRepository.GetAllAsync();
+            return detalleFacturas.Select(df => new DetalleFacturaResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = df.Id,
+                IdEncabezadoFactura = df.IdEncabezadoFactura,
+                Subtotal = df.Subtotal,
+                Impuesto = df.Impuesto,
+                Descuento = df.Descuento,
+                Total = df.Total
+                
             });
         }
 
         public async Task<DetalleFacturaResponseDTO?> GetByIdAsync(int id)
         {
-            var item = await _detallefacturaRepository.GetByIdAsync(id);
-            if (item == null) return null;
+            var detalleFacturas = await _detallefacturaRepository.GetByIdAsync(id);
+            if (detalleFacturas == null) return null;
             return new DetalleFacturaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = detalleFacturas.Id,
+                IdEncabezadoFactura = detalleFacturas.IdEncabezadoFactura,
+                Subtotal = detalleFacturas.Subtotal,
+                Impuesto = detalleFacturas.Impuesto,
+                Descuento = detalleFacturas.Descuento,
+                Total = detalleFacturas.Total
             };
         }
 
         public async Task<DetalleFacturaResponseDTO> CreateAsync(DetalleFacturaRequestDTO dto)
         {
-            var item = new DetalleFactura
+            var detalleFacturas = new DetalleFactura
             {
-                // TODO: Mapear desde dto a entidad
+                IdEncabezadoFactura = dto.IdEncabezadoFactura,
+                Subtotal = dto.Subtotal,
+                Impuesto = dto.Impuesto,
+                Descuento = dto.Descuento,
+                Total = dto.Total
             };
 
-            await _detallefacturaRepository.AddAsync(item);
+            await _detallefacturaRepository.AddAsync(detalleFacturas);
 
             return new DetalleFacturaResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = detalleFacturas.Id,
+                IdEncabezadoFactura = detalleFacturas.IdEncabezadoFactura,
+                Subtotal = detalleFacturas.Subtotal,
+                Impuesto = detalleFacturas.Impuesto,
+                Descuento = detalleFacturas.Descuento,
+                Total = detalleFacturas.Total
             };
         }
 
         public async Task<bool> UpdateAsync(int id, DetalleFacturaRequestDTO dto)
         {
-            var item = await _detallefacturaRepository.GetByIdAsync(id);
-            if (item == null) return false;
+            var detalleFacturas = await _detallefacturaRepository.GetByIdAsync(id);
+            if (detalleFacturas == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            detalleFacturas.IdEncabezadoFactura = dto.IdEncabezadoFactura;
+            detalleFacturas.Subtotal = dto.Subtotal;
+            detalleFacturas.Impuesto = dto.Impuesto;
+            detalleFacturas.Descuento = dto.Descuento;
+            detalleFacturas.Total = dto.Total;
 
-            return await _detallefacturaRepository.UpdateAsync(item);
+            return await _detallefacturaRepository.UpdateAsync(detalleFacturas);
         }
 
         public async Task<bool> DeleteAsync(int id)
