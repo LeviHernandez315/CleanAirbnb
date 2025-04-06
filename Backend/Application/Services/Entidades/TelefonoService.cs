@@ -11,16 +11,16 @@ namespace Application.Services.Entidades
 {
     public class TelefonoService : ITelefonoService
     {
-        private readonly ITelefonoRepository _repository;
+        private readonly ITelefonoRepository _telefonoRepository;
 
-        public TelefonoService(ITelefonoRepository repository)
+        public TelefonoService(ITelefonoRepository telefonoRepository)
         {
-            _repository = repository;
+            _telefonoRepository = telefonoRepository;
         }
 
         public async Task<IEnumerable<TelefonoResponseDTO>> GetAllAsync()
         {
-            var lista = await _repository.GetAllAsync();
+            var lista = await _telefonoRepository.GetAllAsync();
 
             return lista.Select(t => new TelefonoResponseDTO
             {
@@ -32,7 +32,7 @@ namespace Application.Services.Entidades
 
         public async Task<TelefonoResponseDTO> GetByIdAsync(int id)
         {
-            var telefono = await _repository.GetByIdAsync(id);
+            var telefono = await _telefonoRepository.GetByIdAsync(id);
 
             if (telefono == null)
                 throw new Exception("Teléfono no encontrado");
@@ -53,7 +53,7 @@ namespace Application.Services.Entidades
                 IdPersona = dto.IdPersona
             };
 
-            var creado = await _repository.CreateAsync(telefono);
+            var creado = await _telefonoRepository.CreateAsync(telefono);
 
             return new TelefonoResponseDTO
             {
@@ -65,7 +65,7 @@ namespace Application.Services.Entidades
 
         public async Task<bool> UpdateAsync(int id, TelefonoRequestDTO dto)
         {
-            var telefono = await _repository.GetByIdAsync(id);
+            var telefono = await _telefonoRepository.GetByIdAsync(id);
 
             if (telefono == null)
                 return false;
@@ -73,13 +73,13 @@ namespace Application.Services.Entidades
             telefono.NumTelefono = dto.NumTelefono;
             telefono.IdPersona = dto.IdPersona;
 
-            return await _repository.UpdateAsync(telefono);
+            return await _telefonoRepository.UpdateAsync(telefono);
         }
 
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _repository.DeleteAsync(id);
+            return await _telefonoRepository.DeleteAsync(id);
         }
     }
 }
