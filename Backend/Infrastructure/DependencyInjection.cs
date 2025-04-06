@@ -34,9 +34,8 @@ using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
 using Application.Interfaces.Entidades.MarcaInterfaces;
 using Application.Interfaces.Entidades.MetodoPagoInterfaces;
 using Application.Interfaces.Entidades.ValoracionInterfaces;*/
-using Application.Interfaces.Entidades.ModeloInterfaces; 
+ 
 using Application.Interfaces.Entidades.UsuarioInterfaces;
-
 using Application.Interfaces.Entidades.VehiculoInterfaces; 
 // Repositories
 
@@ -44,6 +43,7 @@ using Application.Interfaces.Entidades.VehiculoInterfaces;
 using Infrastructure.Repositories;
 
 using Microsoft.Extensions.DependencyInjection;
+using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
 namespace Infrastructure
 {
 
@@ -136,15 +136,18 @@ namespace Infrastructure
 
             services.AddScoped<ISucursalRepository, SucursalRepository>();
             services.AddScoped<ISucursalService, SucursalService>();
-/*
-            services.AddScoped<ITelefonoRepository, TelefonoRepository>();
-            services.AddScoped<ITelefonoService, TelefonoService>();
+            /*
+             services.AddScoped<ITelefonoRepository, TelefonoRepository>();
+             services.AddScoped<ITelefonoService, TelefonoService>(); 
+            
+             services.AddScoped<IValoracionRepository, ValoracionRepository>();
+            services.AddScoped<IValoracionService, ValoracionService>();*/
 
             services.AddScoped<ITipoVehiculoRepository, TipoVehiculoRepository>();
             services.AddScoped<ITipoVehiculoService, TipoVehiculoService>();
-            services.AddScoped<IValoracionRepository, ValoracionRepository>();
-            services.AddScoped<IValoracionService, ValoracionService>();
- */
+
+     
+
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
