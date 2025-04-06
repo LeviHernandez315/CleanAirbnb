@@ -15,49 +15,75 @@ namespace Application.Services.Entidades
 
         public async Task<IEnumerable<VehiculoResponseDTO>> GetAllAsync()
         {
-            var items = await _vehiculoRepository.GetAllAsync();
-            return items.Select(e => new VehiculoResponseDTO
+            var vehiculos = await _vehiculoRepository.GetAllAsync();
+            return vehiculos.Select(v => new VehiculoResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = v.Id,
+                IdModelo = v.IdModelo,
+                IdDireccion = v.IdDireccion,
+                Año = v.Año,
+                IdTipoVehiculo = v.IdTipoVehiculo,
+                PrecioDia = v.PrecioDia,
+                IdEstadoReserva = v.IdEstadoReserva
             });
         }
 
         public async Task<VehiculoResponseDTO?> GetByIdAsync(int id)
         {
-            var item = await _vehiculoRepository.GetByIdAsync(id);
-            if (item == null) return null;
+            var vehiculo = await _vehiculoRepository.GetByIdAsync(id);
+            if (vehiculo == null) return null;
             return new VehiculoResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = vehiculo.Id,
+                IdModelo = vehiculo.IdModelo,
+                IdDireccion = vehiculo.IdDireccion,
+                Año = vehiculo.Año,
+                IdTipoVehiculo = vehiculo.IdTipoVehiculo,
+                PrecioDia = vehiculo.PrecioDia,
+                IdEstadoReserva = vehiculo.IdEstadoReserva
+
             };
         }
 
         public async Task<VehiculoResponseDTO> CreateAsync(VehiculoRequestDTO dto)
         {
-            var item = new Vehiculo
+            var vehiculo = new Vehiculo
             {
-                // TODO: Mapear desde dto a entidad
+                IdModelo = dto.IdModelo,
+                IdDireccion = dto.IdDireccion,
+                Año = dto.Año,
+                IdTipoVehiculo = dto.IdTipoVehiculo,
+                PrecioDia = dto.PrecioDia,
+                IdEstadoReserva = dto.IdEstadoReserva
             };
 
-            await _vehiculoRepository.AddAsync(item);
+            await _vehiculoRepository.AddAsync(vehiculo);
 
             return new VehiculoResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = vehiculo.Id,
+                IdModelo = vehiculo.IdModelo,
+                IdDireccion = vehiculo.IdDireccion,
+                Año = vehiculo.Año,
+                IdTipoVehiculo = vehiculo.IdTipoVehiculo,
+                PrecioDia = vehiculo.PrecioDia,
+                IdEstadoReserva = vehiculo.IdEstadoReserva
             };
         }
 
         public async Task<bool> UpdateAsync(int id, VehiculoRequestDTO dto)
         {
-            var item = await _vehiculoRepository.GetByIdAsync(id);
-            if (item == null) return false;
+            var vehiculo = await _vehiculoRepository.GetByIdAsync(id);
+            if (vehiculo == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            vehiculo.IdModelo = dto.IdModelo;
+            vehiculo.IdDireccion = dto.IdDireccion;
+            vehiculo.Año = dto.Año;
+            vehiculo.IdTipoVehiculo = dto.IdTipoVehiculo;
+            vehiculo.PrecioDia = dto.PrecioDia;
+            vehiculo.IdEstadoReserva = dto.IdEstadoReserva;
 
-            return await _vehiculoRepository.UpdateAsync(item);
+            return await _vehiculoRepository.UpdateAsync(vehiculo);
         }
 
         public async Task<bool> DeleteAsync(int id)
