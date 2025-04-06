@@ -16,22 +16,27 @@ namespace Application.Services.Entidades
 
         public async Task<IEnumerable<UsuarioResponseDTO>> GetAllAsync()
         {
-            var items = await _usuarioRepository.GetAllAsync();
-            return items.Select(e => new UsuarioResponseDTO
+            var usuario = await _usuarioRepository.GetAllAsync();
+            return usuario.Select(u => new UsuarioResponseDTO
             {
-                Id = e.Id
-                // TODO: Mapear propiedades restantes
+                Id = u.Id,
+                Email = u.Email,
+                Dni = u.Email,
+                RolId = u.RolId
             });
         }
 
         public async Task<UsuarioResponseDTO?> GetByIdAsync(int id)
         {
-            var item = await _usuarioRepository.GetByIdAsync(id);
-            if (item == null) return null;
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null) return null;
             return new UsuarioResponseDTO
             {
-                Id = item.Id
-                // TODO: Mapear propiedades restantes
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Dni = usuario.Email,
+                RolId = usuario.RolId
+
             };
         }
 
@@ -60,12 +65,15 @@ namespace Application.Services.Entidades
 
         public async Task<bool> UpdateAsync(int id, UsuarioRequestDTO dto)
         {
-            var item = await _usuarioRepository.GetByIdAsync(id);
-            if (item == null) return false;
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null) return false;
 
-            // TODO: Mapear dto a entidad existente
+            usuario.Email = dto.Email;
+            usuario.Password = dto.Password;
+            usuario.Dni = dto.Dni;
+            usuario.RolId = dto.RolId;
 
-            return await _usuarioRepository.UpdateAsync(item);
+            return await _usuarioRepository.UpdateAsync(usuario);
         }
 
         public async Task<bool> DeleteAsync(int id)
