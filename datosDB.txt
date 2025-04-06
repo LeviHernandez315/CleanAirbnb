@@ -1,0 +1,106 @@
+
+-- PAISES
+INSERT INTO Paises (Descripcion) VALUES ('Honduras'), ('Guatemala');
+
+-- DEPARTAMENTOS
+INSERT INTO Departamentos (IdPais, Descripcion) VALUES (1, 'Francisco Morazán'), (1, 'Cortés');
+
+-- CIUDADES
+INSERT INTO Ciudades (DepartamentoId, Descripcion) VALUES (1, 'Tegucigalpa'), (2, 'San Pedro Sula');
+
+-- AREAS DE TRABAJO
+INSERT INTO AreasTrabajo (Descripcion) VALUES ('Administración'), ('Limpieza'), ('Logística');
+
+-- ROLES
+INSERT INTO Roles (Descripcion) VALUES ('Cliente'), ('Anfitrión'), ('Empleado'), ('Coordinador'), ('Administrador');
+
+-- VALORACIONES
+INSERT INTO Valoraciones (Valor, Descripcion) VALUES (1, 'Muy malo'), (2, 'Malo'), (3, 'Regular'), (4, 'Bueno'), (5, 'Excelente');
+
+-- METODOS DE PAGO
+INSERT INTO MetodosPago (Descripcion) VALUES ('Tarjeta de Crédito'), ('PayPal'), ('Transferencia Bancaria');
+
+-- TIPOS DE VEHÍCULO
+INSERT INTO TiposVehiculo (Descripcion) VALUES ('SUV'), ('Sedán'), ('Pickup');
+
+-- MARCAS
+INSERT INTO Marcas (Descripcion) VALUES ('Toyota'), ('Hyundai'), ('Ford');
+
+-- MODELOS
+INSERT INTO Modelos (IdMarca, Descripcion)
+VALUES 
+(1, 'Corolla'), 
+(1, 'Hilux'), 
+(2, 'Elantra'), 
+(3, 'F-150');
+
+-- PERSONAS
+INSERT INTO Personas (DNI, RTN, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Edad, FechaNacimiento)
+VALUES 
+('0801199912345', '080119991234501', 'Carlos', 'Eduardo', 'Hernández', 'Martínez', 25, '1999-04-15'),
+('0801199922222', '080119992222201', 'Ana', NULL, 'López', 'Ramírez', 30, '1994-01-10'),
+('0801199933333', NULL, 'Luis', 'Enrique', 'Mejía', NULL, 28, '1996-02-22');
+
+-- TELEFONOS
+INSERT INTO Telefonos (NumTelefono, IdPersona, PersonaDNI)
+VALUES 
+('9876-1234', '0801199912345', '0801199912345'),
+('9543-5678', '0801199922222', '0801199922222'),
+('9234-9999', '0801199933333', '0801199933333');
+
+-- USUARIOS
+INSERT INTO Usuarios (Email, Password, Dni, RolId)
+VALUES 
+('carlos@email.com', 'clave123', '0801199912345', 1),
+('ana@email.com', 'clave123', '0801199922222', 2),
+('luis@email.com', 'clave123', '0801199933333', 1);
+
+-- DIRECCIONES
+INSERT INTO Direcciones (NumCasa, Calle, Colonia, IdCiudad)
+VALUES 
+('123', 'Calle Principal', 'Residencial El Sauce', 1),
+('456', 'Avenida Central', 'Col. San José', 2),
+('789', 'Boulevard Sur', 'Altos del Trapiche', 1);
+
+-- EMPRESAS
+INSERT INTO Empresa (Nombre, Rtn, Correo, CasaMatriz, Telefono)
+VALUES 
+('Inversiones HN', '080199001', 'info@invhn.com', 'Tegucigalpa', '2222-3333'),
+('Logística GUA', '090200002', 'contacto@logigua.com', 'Guatemala', '2233-4455');
+
+-- SUCURSALES
+INSERT INTO Sucursales (Nombre, IdDireccion, Telefono, CodigoSAR, IdEmpresa, EmpresaId)
+VALUES 
+('Sucursal Centro', 1, '2200-1234', 'SAR001', 1, 1),
+('Sucursal Norte', 2, '2200-5678', 'SAR002', 2, 2);
+
+-- PUESTOS DE TRABAJO
+INSERT INTO PuestosTrabajo (IdArea, Descripcion)
+VALUES 
+(1, 'Administrador de Base de Datos'),
+(2, 'Personal de Limpieza'),
+(3, 'Encargado de Logística');
+
+
+-- EMPLEADOS
+INSERT INTO Empleados (Email, Password, Dni, RolId, PuestoId, Salario, DireccionId)
+VALUES 
+('admin@empresa.com', 'admin123', '0801199912345', 5, 1, 30000.00, 1),
+('logistica@empresa.com', 'log123', '0801199933333', 4, 3, 18000.00, 2);
+
+-- ESTADOS DE RESERVA
+INSERT INTO EstadosReserva (Descripcion) VALUES ('Disponible'), ('Reservado');
+
+-- PROPIEDADES
+INSERT INTO Propiedades (Nombre, Descripcion, IdDireccion, Capacidad, NumeroHabitaciones, NumeroCamas, CapacidadParqueo, PrecioPorNoche, IdAnfitrion, IdEstadoReserva, MediaValoracion, ImagenUrl)
+VALUES 
+('Casa Moderna', 'Casa completa con 3 habitaciones y jardín.', 1, 5, 3, 3, 2, 120.00, 7, 1, 4.5, 'assets/img/casa.jpg'),
+('Apartamento Céntrico', 'Cómodo apartamento ideal para viajes de trabajo.', 2, 2, 1, 1, 1, 70.00, 10, 1, 4.0, 'assets/img/propiedad1.jpg'),
+('Apartamento normal', 'Cómodo apartamento .', 2, 2, 1, 1, 1, 70.00, 7, 1, 4.0, 'assets/img/propiedad2.jpg');
+
+
+-- VEHÍCULOS
+INSERT INTO Vehiculos (IdModelo, IdDireccion, Año, IdTipoVehiculo, PrecioDia, IdEstadoReserva, ImagenUrl)
+VALUES 
+(1, 1, 2020, 2, 35.00, 1, 'assets/img/vehiculo6.jpg'),
+(3, 2, 2022, 1, 50.00, 2, 'assets/img/vehiculo5.jpg');
