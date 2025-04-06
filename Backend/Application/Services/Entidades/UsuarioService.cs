@@ -21,7 +21,7 @@ namespace Application.Services.Entidades
             {
                 Id = u.Id,
                 Email = u.Email,
-                Dni = u.Email,
+                Dni = u.Dni,
                 RolId = u.RolId
             });
         }
@@ -34,7 +34,7 @@ namespace Application.Services.Entidades
             {
                 Id = usuario.Id,
                 Email = usuario.Email,
-                Dni = usuario.Email,
+                Dni = usuario.Dni,
                 RolId = usuario.RolId
 
             };
