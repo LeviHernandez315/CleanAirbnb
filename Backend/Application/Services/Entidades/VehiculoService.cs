@@ -21,7 +21,7 @@ namespace Application.Services.Entidades
                 Id = v.Id,
                 IdModelo = v.IdModelo,
                 IdDireccion = v.IdDireccion,
-                Año = v.Año,
+                Anio = v.Anio,
                 IdTipoVehiculo = v.IdTipoVehiculo,
                 PrecioDia = v.PrecioDia,
                 IdEstadoReserva = v.IdEstadoReserva,
@@ -38,7 +38,7 @@ namespace Application.Services.Entidades
                 Id = vehiculo.Id,
                 IdModelo = vehiculo.IdModelo,
                 IdDireccion = vehiculo.IdDireccion,
-                Año = vehiculo.Año,
+                Anio = vehiculo.Anio,
                 IdTipoVehiculo = vehiculo.IdTipoVehiculo,
                 PrecioDia = vehiculo.PrecioDia,
                 IdEstadoReserva = vehiculo.IdEstadoReserva,
@@ -53,7 +53,7 @@ namespace Application.Services.Entidades
             {
                 IdModelo = dto.IdModelo,
                 IdDireccion = dto.IdDireccion,
-                Año = dto.Año,
+                Anio = dto.Anio,
                 IdTipoVehiculo = dto.IdTipoVehiculo,
                 PrecioDia = dto.PrecioDia,
                 IdEstadoReserva = dto.IdEstadoReserva,
@@ -67,7 +67,7 @@ namespace Application.Services.Entidades
                 Id = vehiculo.Id,
                 IdModelo = vehiculo.IdModelo,
                 IdDireccion = vehiculo.IdDireccion,
-                Año = vehiculo.Año,
+                Anio = vehiculo.Anio,
                 IdTipoVehiculo = vehiculo.IdTipoVehiculo,
                 PrecioDia = vehiculo.PrecioDia,
                 IdEstadoReserva = vehiculo.IdEstadoReserva,
@@ -82,7 +82,7 @@ namespace Application.Services.Entidades
 
             vehiculo.IdModelo = dto.IdModelo;
             vehiculo.IdDireccion = dto.IdDireccion;
-            vehiculo.Año = dto.Año;
+            vehiculo.Anio = dto.Anio;
             vehiculo.IdTipoVehiculo = dto.IdTipoVehiculo;
             vehiculo.PrecioDia = dto.PrecioDia;
             vehiculo.IdEstadoReserva = dto.IdEstadoReserva;
