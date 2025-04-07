@@ -1,6 +1,12 @@
 using Application.DTOs.Entidades.UsuarioDTOs;
 using Application.Interfaces.Entidades.UsuarioInterfaces;
 using Domain.Entities;
+using Application.DTOs.Entidades.PersonaDTOs;
+using Application.DTOs.Entidades.RolDTOs;
+using Application.DTOs.Entidades.Rol;
+
+
+
 using System.Net;
 
 namespace Application.Services.Entidades
@@ -17,12 +23,30 @@ namespace Application.Services.Entidades
         public async Task<IEnumerable<UsuarioResponseDTO>> GetAllAsync()
         {
             var usuario = await _usuarioRepository.GetAllAsync();
+
             return usuario.Select(u => new UsuarioResponseDTO
             {
                 Id = u.Id,
                 Email = u.Email,
                 Dni = u.Dni,
-                RolId = u.RolId
+                RolId = u.RolId,
+                Persona = u.Persona == null ? null : new PersonaResponseDTO
+                {
+                    PrimerNombre = u.Persona.PrimerNombre,
+                    PrimerApellido = u.Persona.PrimerApellido,
+                    DNI = u.Persona.DNI,
+                    RTN=u.Persona.RTN
+
+
+
+
+                },
+                Rol = u.Rol == null ? null : new RolResponseDTO
+                {
+                    Id = u.Rol.Id,
+                    Descripcion = u.Rol.Descripcion
+                }
+
             });
         }
 

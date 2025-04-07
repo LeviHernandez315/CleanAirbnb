@@ -57,22 +57,24 @@ renderizalaMeraFactura();
  */
 
 // Obtener datos
+// Obtener datos del localStorage
 const propiedad = JSON.parse(localStorage.getItem("propiedad"));
 const cliente = JSON.parse(localStorage.getItem("clientecomleto"));
 const vehiculos = JSON.parse(localStorage.getItem("vehiculosSeleccionados")) || [];
-const fechaInicio = localStorage.getItem("fechaCheckIn");
-const fechaFin = localStorage.getItem("Ffinal") || "";
+const fechaInicio = localStorage.getItem("fechaCheckIn") || "-";
+const fechaFin = localStorage.getItem("Ffinal") || "-";
 const total = parseFloat(localStorage.getItem("totalFinalPago")) || 0;
 const dias = parseInt(localStorage.getItem("difDias")) || 1;
 
-// Renderizar tarjeta resumen
+// Renderizar tarjeta resumen (parte izquierda)
 const renderizaTargetaFactura = () => {
   const contenedor = document.getElementById("Factura");
+
   contenedor.innerHTML = `
-    <img src="${propiedad.imagenUrl}" class="card-img-top" alt="...">
+    <img src="${propiedad?.imagenUrl || "assets/img/casa.jpg"}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">${propiedad.nombre}</h5>
-      <p class="card-text">${propiedad.descripcion}</p>
+      <h5 class="card-title">${propiedad?.nombre || "Propiedad"}</h5>
+      <p class="card-text">${propiedad?.descripcion || "Sin descripción"}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Vehículos alquilados: ${vehiculos.length}</li>
@@ -84,29 +86,31 @@ const renderizaTargetaFactura = () => {
   `;
 };
 
-// Renderizar tabla de servicios
+// Renderizar tabla de servicios (parte derecha)
 const renderizarServicios = () => {
   const tabla = document.getElementById("tablaServicios");
   tabla.innerHTML = "";
 
-  // Alojamiento
-  tabla.innerHTML += `
-    <tr>
-      <td>${propiedad.nombre} (${dias} noche${dias > 1 ? 's' : ''})</td>
-      <td>${fechaInicio}</td>
-      <td>${fechaFin}</td>
-      <td>L. ${(propiedad.precioPorNoche * dias).toFixed(2)}</td>
-    </tr>`;
+  if (propiedad) {
+    tabla.innerHTML += `
+      <tr>
+        <td>${propiedad.nombre} (${dias} noche${dias > 1 ? "s" : ""})</td>
+        <td>${fechaInicio}</td>
+        <td>${fechaFin}</td>
+        <td>L. ${(propiedad.precioPorNoche * dias).toFixed(2)}</td>
+      </tr>
+    `;
+  }
 
-  // Vehículos
   vehiculos.forEach(v => {
     tabla.innerHTML += `
       <tr>
-        <td>Vehículo (${v.año}) - ${v.idModelo}</td>
+        <td>Vehículo ${v.idModelo} (${v.año})</td>
         <td>${fechaInicio}</td>
         <td>${fechaFin}</td>
         <td>L. ${(v.precioDia * dias).toFixed(2)}</td>
-      </tr>`;
+      </tr>
+    `;
   });
 };
 
@@ -114,21 +118,27 @@ const renderizarServicios = () => {
 const renderizarTotales = () => {
   const impuesto = total * 0.13;
   const subtotal = total - impuesto;
-  document.getElementById("FtotalPago").textContent = total.toFixed(2);
-  document.getElementById("FimpPago").textContent = impuesto.toFixed(2);
-  document.getElementById("FsubtotalPago").textContent = subtotal.toFixed(2);
+
+  document.getElementById("FtotalPago").textContent = `L. ${total.toFixed(2)}`;
+  document.getElementById("FimpPago").textContent = `L. ${impuesto.toFixed(2)}`;
+  document.getElementById("FsubtotalPago").textContent = `L. ${subtotal.toFixed(2)}`;
 };
 
-// Mostrar datos cliente
+// Mostrar cliente
 const renderizarCliente = () => {
-  document.getElementById("clienteNombre").textContent = `${cliente.nombres} ${cliente.apellidos}`;
-  document.getElementById("clienteCorreo").textContent = cliente.email || "-";
-  document.getElementById("clienteDireccion").textContent = cliente.direccion || "Ciudad, Honduras";
+  const nombre = `${cliente?.persona?.primerNombre || ""} ${cliente?.persona?.primerApellido || ""}`;
+  const rtn = cliente?.persona?.rtn || "No disponible";
+  const rol = cliente?.rol?.descripcion || "No asignado";
+
+  document.getElementById("nombreCliente").textContent = nombre;
+  document.getElementById("rtnCliente").textContent = rtn;
+  document.getElementById("rolCliente").textContent = rol;
 };
 
 // Fecha emisión
-document.getElementById("fechaEmision").textContent = new Date().toLocaleDateString();
+document.getElementById("fechaFactura").textContent = new Date().toLocaleDateString();
 
+// Ejecutar todo
 renderizaTargetaFactura();
 renderizarServicios();
 renderizarTotales();

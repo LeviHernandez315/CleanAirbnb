@@ -16,7 +16,10 @@ namespace Infrastructure.Repositories.Entidades
 
         public async Task<IEnumerable<Usuario>> GetAllAsync()
         {
-            return await _context.Set<Usuario>().ToListAsync();
+            return await _context.Set<Usuario>()
+         .Include(u => u.Persona)
+         .Include(u => u.Rol)
+         .ToListAsync();
         }
 
         public async Task<Usuario?> GetByIdAsync(int id)
