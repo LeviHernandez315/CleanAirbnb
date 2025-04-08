@@ -9,5 +9,7 @@ namespace Application.Interfaces.Entidades.UsuarioInterfaces
         Task AddAsync(Usuario entity);
         Task<bool> UpdateAsync(Usuario entity);
         Task<bool> DeleteAsync(int id);
+        Task<Usuario?> GetByEmailAsync(string email);
+
     }
 }

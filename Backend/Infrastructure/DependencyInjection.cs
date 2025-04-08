@@ -47,6 +47,8 @@ using Application.Interfaces.Entidades.TipoVehiculoInterfaces;
 using Application.Interfaces.Entidades.MetodoPagoInterfaces;
 using Application.Interfaces.Entidades.TelefonoInterfaces;
 using Application.Interfaces.Entidades.ValoracionInterfaces;
+using Application.Interfaces.IServices;
+using Infrastructure.Authentication;
 namespace Infrastructure
 {
 
@@ -158,10 +160,13 @@ namespace Infrastructure
           
 
             services.AddScoped<IVehiculoRepository, VehiculoRepository>();
-            services.AddScoped<IVehiculoService, VehiculoService>(); 
+            services.AddScoped<IVehiculoService, VehiculoService>();
 
+            //registrar JwtService como Scoped
+            //services.AddScoped<IJwtService, JwtService>();
 
-
+            // Registrar JwtService como Singleton
+            services.AddSingleton<IJwtService, JwtService>();
 
 
 

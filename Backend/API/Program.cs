@@ -29,7 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Add services to the container.
 builder.Services.AddAuthorization();
 
-builder.Services.AddScoped<JwtService>();
+//builder.Services.AddScoped<JwtService>();
 
 var dbConfig = new DatabaseConfig();
 
