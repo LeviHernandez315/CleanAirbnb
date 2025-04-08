@@ -49,5 +49,18 @@ namespace API.Controllers.EntitiesControllers
             var deleted = await _usuarioService.DeleteAsync(id);
             return deleted ? NoContent() : NotFound();
         }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginUsuarioRequestDTO dto)
+        {
+            var token = await _usuarioService.LoginAsync(dto);
+
+            if (token == null)
+                return Unauthorized("Credenciales incorrectas.");
+
+            return Ok(new { token });
+        }
+
     }
 }

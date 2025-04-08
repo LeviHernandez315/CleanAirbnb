@@ -6,18 +6,20 @@ using Application.DTOs.Entidades.RolDTOs;
 using Application.DTOs.Entidades.Rol;
 
 
-
 using System.Net;
+using Application.Interfaces.IServices;
 
 namespace Application.Services.Entidades
 {
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IJwtService _jwtService;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IJwtService jwtService)
         {
             _usuarioRepository = usuarioRepository;
+            _jwtService = jwtService;
         }
 
         public async Task<IEnumerable<UsuarioResponseDTO>> GetAllAsync()
@@ -100,11 +102,19 @@ namespace Application.Services.Entidades
             return await _usuarioRepository.UpdateAsync(usuario);
         }
 
-        //hola
-
         public async Task<bool> DeleteAsync(int id)
         {
             return await _usuarioRepository.DeleteAsync(id);
+        }
+
+        public async Task<string?> LoginAsync(LoginUsuarioRequestDTO dto)
+        {
+            var usuario = await _usuarioRepository.GetByEmailAsync(dto.Email);
+
+            if (usuario == null || usuario.Password != dto.Password) // Aquí podrías usar BCrypt si encriptas
+                return null;
+
+            return _jwtService.GenerateToken(usuario.Id.ToString(), usuario.Rol?.Descripcion ?? "Usuario");
         }
     }
 }

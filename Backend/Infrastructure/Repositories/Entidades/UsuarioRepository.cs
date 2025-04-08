@@ -52,5 +52,13 @@ namespace Infrastructure.Repositories.Entidades
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Usuario?> GetByEmailAsync(string email)
+        {
+            return await _context.Usuarios
+                .Include(u => u.Rol)
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
     }
 }

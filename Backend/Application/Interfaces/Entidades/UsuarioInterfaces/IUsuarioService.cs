@@ -9,5 +9,7 @@ namespace Application.Interfaces.Entidades.UsuarioInterfaces
         Task<UsuarioResponseDTO> CreateAsync(UsuarioRequestDTO dto);
         Task<bool> UpdateAsync(int id, UsuarioRequestDTO dto);
         Task<bool> DeleteAsync(int id);
+        Task<string?> LoginAsync(LoginUsuarioRequestDTO dto);
+
     }
 }
